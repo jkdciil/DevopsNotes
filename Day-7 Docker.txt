@@ -1,0 +1,186 @@
+Video-27
+--------
+*)docker is all about OS-level virtualization and it follows union file system and layered architecture.
+*)Container:-it is a vertual machine or computer.
+*)here if you have one computer then you need 5 more computers and you don't have money to purchase then you need to install one
+  s/w that is VMware created by vmware company (or)oracle virtual box created by oracle.by using theese s/w on our H/W->OS->we
+  need to install VMware->os of vm->s/w.
+*)if you have a computer have 12GB ram and 1Tb of rom your computer taking 2 GB ram and 200gb of rom with the help of VMware we
+  we will creat 4 computers in theese computers we will distribyte the 2GB ram and 200 GB of rom for every computer that's how we
+  will make one computer to 5 computers.and here mandatorly you need to install os in 4 computers which you created.
+*)in docker the base computer OS must be linux.here we need to creat containers on the top of base computer.and here no need to 
+  install os in the containers.
+*)the major advantage with the docker is no need to specify H/W components and no need to install OS and no need to specify Rom.
+*)even though you installed docker the container will take os,ram,rom but those were neglegible.
+*)docker people created a online repository that is docker hub which will have images which is nothing but OS(5%).
+*)if you take Base instane have h/w components and on that you will have RHEL(red hat enterprise linux) which is 95% OS.and you need 
+  to install docker s/w above that create containers to creat containers you need to download docker image which you want like 
+  cent os,fedora,amazon linux. here the containers will use 95% of os from base instance only and it willuse 5% os from dockerimage
+  this concept we will call os level Virtualization.and docker container are less weight it will take less space.
+*)Docker:-it is a tool which will perform the Operating System Level virtualisation also known as a containerization.
+          (or)it is a tool which is used to creat virtual machines.
+
+Video-28
+--------
+*)layered archetechture means one s/w will appere on the top of other s/w this structure we will call layered archetechture.
+*)if you download image from hub.docker and you created one container in that container you installed different types of s/w.
+*)and you want to follow every one in your team like this formate them you need to creat a image(OS+S/W+folders+file) and you
+  need to share that document to all teamates they will download and they will install.now every one container had same version
+  of s/w and same files and folders this is called union file system.
+*)Benfits with the docker
+• Containerization (OS level virtualization)(No need guest OS)
+• No pre-allocation of RAM
+• Can replicate same environment
+• Less cost
+• Less weight (MB’s in size)
+• Fast to fire up
+• Can run on physical/virtual/cloud
+• Can re-use(same image)
+• Can create machines in less time.
+*)docker components:-1)docker image
+                     2)docker container
+                     3)docker file:- describe steps to creat docker image.
+                     4)docker hub:-stores all docker images publicly.
+                     5)docker daemon:-docker service.
+*)daemon means background service.
+ways to creat docker image
+--------------------------
+*)take image from docker hub.
+*)creat image from existing docker container.
+*)creat image from docker file.
+
+Video-29
+--------
+*)creat one instance and launch it and docker is alredy downloaded s/w so you just need to install it "yum install docker" and
+  you need to start the service."service docker srart".
+*)"docker run -it ubuntu /bin/bash" we are using docker that's why "docker" and "run" means creat container by using "ubuntu" 
+  image."-it" means interactive the terminal.
+*)linux OS will have lot of shells like c shell k shell and bash shell bash is a advanced shell.
+*)"docker run -it ubuntu /bin/bash" enter.to creat container.
+*)"docker ps" it will show you only running container.whenever you exit from your container please enter this command.
+*)"docker images" it will show you how many images you downloaded.
+*)docker ps -a" it will show you all container details.
+*)"docker search ubuntu" this one will search in online.
+*)"docker run -it chef/chefdk /bin/bash" to create container with the help of chef.
+*)if you don't want to creat any container and you need to download s/w then "docker pull jenkins" or you can go to hub.docker
+  select jenkins image there you will find command to exicute in your terminal.
+*)if you want to rename your container then "docker rename oldname newname".
+*)if you want to give the name at the time of creating container "docker run -it --name vishnu ubuntu /bin/bash" it will creat 
+  container name with vishnu.
+*)when you exit from container it will stop the container again you need to start the container "docker start name(or)containerID".
+*)if you want to go inside of the container "docker attach name(or)containerID.
+*)to stop "docker stop name(or)cID.
+*)if you want to remove any container "docker rm name"
+*)//note:-if you want to go inside of conainer then you need to start the container and if you want to remove the container 
+          first you need to stop the container and you need to remove it.
+*)"cat /etc/os-release" to check the OS.
+
+Video-30
+--------
+*)"apt-get install apache2" for ubuntu os(debian family) this is for installing httpd service.while installing it will ask you 
+  about region(select region number) and time zone(select zone number and enter).
+*)"apt-get update -y" to update the container.
+*)and creat a file in /tem/myfile and come back.
+*)now we need to creat one image.if you use this image in other container then the container will have the myfile and tree s/w
+  and httpd s/w in that new container.
+*)"exit" to come out from container. and to creat image from existing container "docker commit oldcontainer imageName".
+*)by this command we will create our own image.
+
+Other way to creat image:-
+--------------------------
+*)by using docker file.
+*)dockerfile:-a text file with instructions to build an image.automation of docker image creation.we will give small instruction
+  like FROM,RUN,CMD.
+*)"pwd" to see where are you
+*)come back to ec2-user and creat a filename "Dockerfile" here D should be capital and inside of the folder
+  FROM ubuntu
+  RUN echo "message" > /tmp/testfile
+  RUN apt-get install apache2
+  Run apt-get install tree
+*)save it.
+*)"docker build -t imagename ." this one will creat a image.here "." means it will take docker file only.
+*)"docker images" to check how many images we have.
+
+Video-31
+--------
+*)Docker Volumes:-it is a directory in your container.firstly diclare directory as a volume and share the volume with other container
+  and eventhough your container in stop possition you can able to access the volume.and you need to declare volume while creating
+  container only.you can't create any volume after creating container.you can share this volume with n number of containers.
+*)you can map volumes in two ways
+      1)share host-container 
+      2)share container-container
+*)to creat volume you need to do few changes in the Dockerfile
+    FROM ubuntu
+    Volume ["/data"]
+*)you need to creat image "docker build -t imagename ."
+*)creat container "docker run -it --name containername imagename /bin/bash"
+how to share volume:-
+----------------------
+*)till now we created one container only.you need to create 2 nd one so we need to add some thing while declaring the container
+  "docker run -it --name container2 --volume-from container1 ubuntu /bin/bash".
+*)and you need to give all permission for container2 about volume so
+  "docker run -it --name container2 --privileged=true --volumes-from container1 ubuntu /bin/bash"
+*)exit
+*)if you create any file in container2 then data will appear in container1 also.
+
+*)create containe3 "docker run -it --name container3 -v /vish ubuntu /bin/bash"
+*)creat container4 by taking reference from container3
+  "docker run -it --name container4 --privileged=true --volume-from container3 ubuntu /bin/bash"
+*)create one file in c4 it will appear in c3.
+
+//note:-above concept is share container-container.
+
+share host-container:-
+----------------------
+*)create one container and declae a volume while creating the container.
+  "docker run -it --name container5 -v /home/ec2-user:/vishnu ubuntu /bin/bash"
+*)if you creat any file in c5 it will appearin the base computer.exit.
+*)"docker inspect container name" this command will give you the json format output search for "mounts" ther you will find 
+  (destination="folder)is the special folder i mean volume.
+
+Video-32
+---------
+*)Port Maping or port export:-
+------------------------------
+*)Scenorio:- create one ec2 instance and create one container and add data in that container now i want to expose that data to
+            the world in general we will install httpd service and we will expose the data with the help of public ip address
+            but in containers we don't have ip adress it will have ports.you need to open port for each container and you need 
+            to map with container port then you will get response.
+*)creat ec2 instance and creat container
+ "docker run -td --name container7 -p 80:80 ubuntu"
+  here d means detached if you don't want to go inside of the computer then we will use "d". "-p" represent the port and "80:80"
+  first 80 is base computer port and second one for container.no need to give /bin/bash.
+*)now i want to go inside of the above container "docker exec -it conyainer7 /bin/bash" now i need to interact with container so
+  i mentioned "-it" and /bin/bash
+*)update your container "apt-get update -y"
+*)install apache2 package "apt-get install apache2 -y"
+*)start service "service apache2 start"
+*)go to var folder you will find www folder -> you will find html->index.html(default file) "cd /var/www/html"
+*)creat one file "echo "hi pandu" > vi.html"
+*)if you want to see data which is inside index.html then take publc ip from ec2 instance and google it.if you want to see data
+  of vi.html then "public ip:ec2 prt number/vi.html" you need to google it.
+*)if you want to creat other container then you need to open other port in ec2 instance
+  "docker run -td --name container7 -p 90:80 ubuntu".
+
+HUB.docker:-
+------------
+*)"docker images" to see the all images in your container.
+*)"docker login" it will ask username and password.
+*)if you eant to upload any image initially you need to reserve some place in your hub so
+  "docker tag imagename hubUsername/newnameofIMAGE" it will generate refference image in your container.
+*)now you need to push the image to hub "docker push hubUsername/newnameofimage".
+*)now goto hub.docker and refresh it.you will find the image.
+*)now creat other instance in other region and creat container with the help of the that image you uploaded in hub.
+*)install docker and start the service and pull the image from dockerhub "docker pull newimagename" and creat other container
+  "docker run -it --name pariscon newimagename /bin/bash".
+*)till now the image is public any one can download the image but i want to download the image only my team members then goto 
+  setting click make private.
+*)to delete image "docker rmi imagename".
+*)now creat container with heip of same image it will show you the error so you need to provide login details of hub in paris 
+  instance and you need to pull the image.
+*)if you want to stop all in docker like containers images then "docker stop $(docker -a -q)"
+*)if you want to remove container "docker rm $(docker -a -q)"
+*)for removing images "docker rmi $(docker -a -q)"
+*)inside sha256 algarithem we are following.
+*)for demon container we need to open ports in ec2 (sequrity group->edit inbound rules->add rule->custom ctp,90,ipanywher v4->
+  save it.

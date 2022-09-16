@@ -1,0 +1,71 @@
+*)What is devops?
+*)what is server?
+*)what is cloud?
+*)what is Ec2?
+*)what is scale up and scale down?
+*)AWS terminologie for the OS,CPU,RAM,harddisc,
+*)types of storages in the cloud?
+*)advantages of cloud?
+*)how to launch window instances?
+*)what is pem file and why we need that?
+*)what is RDP and what is it's port number why we need ports?
+*)how to launch linux instance?
+*)what is ppk file?
+*)what is ssh and what is it's port numbers?
+*)how to convert .pem file to ppk file using putty gen?
+*)what is http and https and it's port numbers?
+*)hoe to creat web server?
+*)what is status check how many types and how to resolve the problem?
+*)what is floating error and why it will happen and how to rectify it?
+*)how to protect your instance from accedental termination?
+*)what is OS?and types iin OS?
+*)Difference in windows and linux?
+*)Archetechture of winows and linux?
+*)folders and files in windows and linux?
+*)in LInux purpose of bin,sbin,etc,usr,boot)
+Linux
+------
+*)command for to switch normal user to root user?
+*)command for to switch root user to normal user?
+*)command for to creat file and to creat multiple files and to creat empty files?
+*)command for creating directory?and multiple directorys?
+*)command for to creat hidden files and directorys?
+*)command for to see files and directorys in home or current directory?
+*)command for to creat a folder inside of a othe folder?
+*)command for come back of the folder?
+*)command for see where your in?
+*)command for see what are the commands you used till now?
+*)command for upadte instance as a normal user and as a admin?
+*)how to see complete tree structure of the folder?
+*)what is yum means?
+*)command for to copy file or folder?
+*)command for cut and paste operation?
+*)command for rename the file or folder?
+*)command for delete the file or folder?
+
+Scenorio:-if you have a folders fola/folb/folc/fold/fole
+*)command to creat file in fole directly?
+*)copy file from fole to folb?
+*)cut paste file from folb to fold?
+*)rename file in fold directly?
+*)delete file in fold directly?
+
+*)command for search a word in a file or file in folder?
+*)what is the use of command less and more?
+*)command to see first few lines in file or particular nuber of lines in file?
+*)command to see last few lines in file or particular nuber of lines in file from bottom?
+*)command to see your file data in alphabetic order?
+*)command to see your instance hostname?
+*)command to see your instance ip?
+*)command to see whoch os your using?
+*)why we will mention *infront and backend at the name of the file?
+*)command to see a s/w installed or not in your instane?
+*)how to install a s/w and how to uninstall s/w from your instance?
+*)command to see s/w installed or not in your instane?
+*)command to see all installed s/w in your instance?
+*)command to see particular s/w name in all installed s/w?
+*)command to start and stop the s/w service?
+*)command to keep your service alive eventhough you restart your instance?
+*)command to creat 30 folder or files at a time.
+*)what is the use of "ctrl+c"?
+*)

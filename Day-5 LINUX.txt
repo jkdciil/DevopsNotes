@@ -1,0 +1,180 @@
+Video-13
+--------
+How toupdate linux OS:
+----------------------
+*)"sudo yum update":-if your a normal user.
+*)"yum update":-if your a admin.
+
+*)after it will ask your permission click on yes.
+how to see complete tree structure of your folders:
+---------------------------------------------------
+*)YUM:-yellow doc update modifier.
+*)"yum install tree":-we need to install this s/w first to see the complete structure.
+how to copy the file or folder:-
+-------------------------------
+*)"cp source destination" you need to give source meeans file or folder and you need to give destination folder.
+
+for cut:-
+---------
+*)"mv source destination" for cut operation.for rename also we will use this command only."mv oldname new name".
+how to delete empty file and non empty folder:-
+----------------------------------------------
+*)"rm -rf foldername" rm means remove and rf means recursive forcely.
+*)if i have a folders which are one inside of another a/b/c/d and i want to creat a file or folder inside of the d then the command is
+  "touch path filename" this command will create the file,ex:-"cat dira/dirb/dirc/dird/file1" enter.and if you want to add the data in the
+  file you need to go like this only.
+*)if you want to see the what are the file in the d directly "ls dira/dirb/dirc/dird" enter.
+*)if you want to creat a folder in the d folder directly "mkdir dira/dirb/dirc/dird/folder1" enter.
+
+Video-14
+--------
+how to search a word:-
+----------------------
+"grep" globalregular expression point.
+"grep wordname locationofFile"
+*)note "less" key word used to read data "less lacationofFile"." :q  "to come out.
+*)"more" command is also used for read the data "more location of file".
+how to see few lines in a file in your terminal:-
+-------------------------------------------------
+*)"head" this command used to see the top lines in your file by default it will shoe you 10 lines.if you don't want to 10 lines you want
+  to see less than 10 lines you need to mention there.
+  ex:-to see default  "head location of file"
+  ex2:-to see particular lines "head -number locationOfFile"
+*)"tail" this command used to see bottom 10 lines (default).if you want to see particular bottom lines then you need to mention.
+how to see your file data in alphabetic order:-
+----------------------------------------------
+*)"sort file" by using this command you can able to see your file data in alphabetic order.but original data stays as it is.for displaying we 
+  will use this.
+how to see your computer name in linux:-
+----------------------------------------
+"hostname" this command used to see your instance name.
+how to see your instance ip address:-
+-------------------------------------
+*)//note:-in windows open cmd and type "ipconfig" enter ther you will find IPv4 this is a private ip address. to see your public ip address
+ you need to go to the chrome and type 'what is my ip' it will show you.web will provides the public ip for your system.
+*)in linux os "ifconfig" this will give you lengthy output if you want to see only ip address "hostname -i" enter.this is private ip of 
+  your instance.
+how to see which os your using:-
+--------------------------------
+*)"cat /etc/os-release" this will give you full info.if you forget any first letter or last letter of the file then use"*" this will mach
+ the file and it will give you the out put.
+*)ex:-cat /etc/os-rel* this will give you the out put.
+*)ex2:-cat /etc/*release this will also give the output.
+*)ex3:-cat /etc/*rel* this will also give you the output.
+how to see s/w installed or not in your instane:-
+-------------------------------------------------
+*)"which s/wName" this will tell you whether the s/w installed or not.
+how to update s/w or app in your instance:-
+-------------------------------------------
+*)"yum update name -y" this command will update the s/w.
+*)ex:-yum update httpd -y
+how to remove s/w or app in your instance:-
+-------------------------------------------
+*)"yum remove name -y" this command will remove the s/w.
+*)ex:-yum remove httpd -y
+how to see how many s/w installed in your instance:-
+---------------------------------------------------
+"yum list installed" this command will give all s/w names.but if you want particular name "yum list installed | gerp httpd*".
+*)few s/w are need to start and stop the service.for starting "service httpd start" and for stop "service httpd stop" and to check the 
+ status "service httpd sttus".
+*)scenorio:-you strat the httpd service and you stoped your instance and you start the instance now what is your httpd service status.
+  ->this shiuld be inactive and you need to connect your instance through putty and you need to start your service.if you dont want this 
+  means eventhough you restart your instance your httpd service should be in active state for that you need to exicute one command.that is
+  "chkconfig httpd on" by using this you can keep you service alive.if you want to off this "chkconfig httpd off".
+
+Video-15
+--------
+*)"exit" this command is used to switch admin user to normal user.
+Family of OS:-
+------------
+*)Red Hat:-1)amazon linux
+           2)red hat entreprise linux
+           3)cent os
+           4)fedora
+*)//note:-if you use above os then we need to "yum","httpd s/w" like that.
+  //note:-in rhel till Version 6 we are able to use "service httpd start" but for V7&V8 we will use "systemctl start httpd".
+*)DeBian :-1)ubantu
+           2)debian it self os
+*)//note:- insted of yum here we will use "apt-get" and isted of httpd package "apache2" we will use.
+*).rpm means redhat package maneger file.
+*)"echo" this command is used to write data creat files we will see how."echo "vishnu" > newfile" this command first creat the file and
+  after that it will insert the data.to add onemore line "echo "vardhan" >> newfile". and if you want to over ride the data then you need
+  to write "echo "jinka" > newfile" this command will replace the first line.
+*)"whoami" this command will tell you who you are means are you a root user or normal user.
+*)"find -type f" this command will use to know how many files are in your current directory.
+  ex:-./file here '.' represent the directory.
+  ex2:-./. here first '.' represent the current directory and second '.' tell that the file is hidden file.
+*)"find -type d" this command is used to see directorys in your current directory.
+*)"find / -type f" this command is used to see all files in top level root directory.
+*)"find / -type d" this command is used to see all folders in top level root directory.
+*)senorio:- i knew file name i want to see where is it's location then "find / -type f -name filename"
+*)"find / -type d -name foldername" for folder.
+Short cuts:-
+-------------
+*) up arrow and down arrow is used to see previous commands and we are able to use it.
+*)for copy paste you need to select and rightclick whatever you want to do.
+*)"touch file{1..20}" this will creat 20 files like file1 and file2 till file20.
+*) accidentally you entered wrong command and you don't want toenter backspace then press "ctrl+c".
+
+Video-16
+--------
+how to creat user account and group:
+------------------------------------
+*)"useradd name" to creat user.to check open passwd file "cat /etc/passwd".at bottom you will find the name.
+*)"groupadd name" to creat group.to check open group file  "cat /etc/group". here you need to observe one thing initially you created one
+  user right by default you will find one group with the username.
+*)now you created one user and one group. you need to exicute one command to add that user in group which you created that is
+  "gpasswd -a username groupname".
+*)if you want to remove or delete user from group hten "gpasswd -d username groupname".
+*)to add multiple user in the group "gpasswd -M username1,username2,username3 groupname".
+how to creat shortlink and hardlink:-(shortlink means shortcut and hardlink means backup)
+-------------------------------------
+*)"ln -s filename dummynamefile" this will creat short cut for any file.for suppose your file is in /home/ec2-user/folA/folB if you want to
+ go there it will take lot of time so if you creat shortcut file no need to go through all.
+*)if you want to add any data we are able to add in the short cut file the data will apper in original file also.
+*)"ls" to see the dummy file it will apper in different colour and if you delete the original file then the dummy file will apper in red.
+*)you unable to open dummy file and it was deleted.
+*)"top" command is used to see runnigmemory.
+*)"ln filename hardfilename" here there is no need to mention any flag and ln it self hard link.for understanding and to avoid confusion
+ we mentioned hard infront of file name.there is no purpose and you can give any name.
+*)in windows if you insert any data in backup file you can't see that data in the original file.but in linux if you insert any data in 
+  backup file we are able to see that data in original file.
+how to creat the zip file:-
+-------------------------- 
+*)"tar -cvf o/pfilename.tar i/pfilename" this is how we need to pack the folder first and after this we need to zip it.
+*)"gzip o/pfilename.tar" to creat zip file.you will get file like o/pfilename.tar.gz
+*)to un zip file "gunzip o/pfilename.tar.gz".you will get file like o/pfilename.tar
+*)to remoe tar "tar -xvf o/pfilename.tar" now you will get file like o/pfilename.
+how to download s/w:-
+----------------------
+*)previously we directly installed httpd and tree s/w in our instance.but normally we need to download first.
+*)"wget linkofS/W" to download.
+*)"yum install chef".
+
+Video-17
+--------
+*)if you want to delete every thing in your current directory then "rm -rf *" enter.
+*)insted of "ls -l" we are able to use "ll"
+*)afetr ll you see drwvj-r- like that initially you find d then it is a ditectory and if you find -fjgj-r like that that is file.
+*)if you ceat a file one hardlink will genarate automaticallt and for folder 2 hardlinks will generate.by this we get our data back.
+*)drwxr-xr-x  for folder -rw-r--r-- for file after first letter the next letters are pemissions.r->read(4),w->write(2),x->exicute(1).
+  by default directory permitions are 755.and by defalt permissions for file is 644.
+how to change permissions for file or directory:-
+-------------------------------------------------
+*)"chmod 777 foldername" here you can give any number 777 means rwxrwxrwx giving permission for owner grop other to read write exicute.
+how to change owner for the folder or file:-
+--------------------------------------------
+*)"chown foldername" to change owner for folder. 
+how to change group for the folder or file:-
+--------------------------------------------
+*)"chgrp groupname oldgroup" for change the group.
+
+
+*)after this we need to cofig name and email in git 
+   git config --globe user.name "vishnu"
+   git config --global user.email "vishnuabc@gmail.com"        -->this one in mumbai region.
+
+   git config --global user.name "vardhan"
+   git config --global user.email "vardhanabc@gmail.com"
+*)to check the above details are correctly provided "git config --list"
+*)vi filename if you don't want to save ":q!".

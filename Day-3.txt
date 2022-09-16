@@ -1,0 +1,88 @@
+Video-5
+----------
+NIL
+Video-6
+----------
+*)Web Server:-A bundle of Web Pages or group of web pages
+
+*)STEPS FOR WEB SERVER
+  1)Launch the instance
+  2)Install the web s/w
+  3)load web files
+  4)start the service
+
+*)first you need to creat the instance in aws
+*)open putty and enter ip address and click on ssh+ and click on auth and browse the ppk file and click on ok
+*)by using linux commands you need to install web s/w
+      "sudo su"   enter
+     
+      "cd /var"  enter
+      "ls"    enter to see all folders in your system
+
+      "yum install httpd -y" enter  after enter chech folders now you will find the one new folder called [WWW] to check that you need to 
+       enter "ls"  and inside of that folder one htmt folder will exist
+      "cd www" enter
+      "ls" enter this will show you all folders present in the www folder
+
+      //if you write anything in side that html folder that will appear while you browse.
+     
+      "echo "VISHNU VARDHAN" > index.html" enter this command will write that name inside of the html folder
+*)now we need to start the service.
+      "service httpd start" enter to start the web service.now it is started.
+
+*) to check we need to go to the aws instance->instance id->copy Public IPv4 address and open chrome and google it.you will get error why
+  becuase you opend input port but you haven't open output port yet so it will take your request but it don't give any response.you will 
+  get site can't reached right now so you need to do some settings in your instance.
+*)after click on instance id scoll down little bit you will find option called "security"->security groups->edit inbound rules->add rule->
+  type(http),source(anywhere). and save.
+*)now you google the public ip of your instance you will get what you wrote.
+*)ssh port:-we use to go inside of linux server physically and run some linux commands
+*)http port:-we use to access web site through internet.
+
+Video-7
+--------
+NIL
+Video-8
+-------
+*)ssl:-secure socket layer.
+
+*)Status Check
+--------------
+1)instance status check
+2)system status check
+
+*)actually we will see in status check as 2/2 passed but in least casess we will see 1/2 passed that means "System Status check" got passed
+  but Instance status check is failed.0/2 passed means system status check is failed and instance .
+  1/2:-you need to reboot the instance.goto instance state->reboot instance.By clicking on the reboot option entire OS will reloaded there 
+       will be no loss of data.
+  0/2:-you need to restart which means stop and start the instance.By clicking on stop/start the entaire VM migrated to another physical 
+       machine and here also your not going to loss your data.
+Video-9
+--------
+*)Whenever you will get putty floating error then you need to change few settings.
+  open putty->connection->seconds there you will find number (Default sec 00)->make ti 30.->session->Deafult settings->save.
+*)if you didn't touch your command prompt for 2,3 min the fattle error will accour.when you mention 30 then your putty will restart for 
+every 30 sec.so it will never go to inactive.
+
+Protect from accedental termination:-
+-------------------------------------
+Selct instance->Actions->Instance settings->Change Termination protection->Enable->Save.
+*)while creating the instance you will find advance settings there you will find termination protection there you need to select enable.
+
+Quick launch Instance:
+-----------------------
+*)here you need to select AMI only no need to select instance type and all those things and select review and launch option then it will 
+  go to final stage and creat the instance.and select the instance and click on the connect there you will find the EC2 Instance Connect.
+  the AWS will provide putty in onlie directly so no need to open putty and no need to enter user name and password and all those things.
+*)why we need to install putty and putty gen in our laptop even though aws providing those?
+  -->>this is not user friendly.if you didn't use the terminal for 5 or 10 min then it will go to inactive.while doing small works only we
+      priffer this.
+
+Regions(countrys)&availability zones:-
+--------------------------------------
+*)if you have existing innstance you will find the option called availability zone.while creating the instance if you didn't select any
+  specific zone then it will take default zone but if you want specific zone then you need to select specific zone while you creating the
+  instance.
+*)while ceating instance you will find option called "Subnet"->select dropdown->choose zone.
+*)to avoid network latency problem choose nearest zone.
+     

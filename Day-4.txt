@@ -1,0 +1,95 @@
+Video-10
+--------
+*)OS:-it is a interface b/n user to computer.there are only 2 os are available.
+*)WINDOWS:-1)not for free
+           2)not open for the world which means whatever the language used to create the windows os they will never exopse to the world.
+           3)user friendly.easy to learn.
+           4)multiple users and multiple tasks are possible but we have limit in users
+           win 98,win xp,win vesta,win 8,win9,win 10-->micro soft released OS
+           win 2012,win 2016,win 2018, win 2019-->web servers.
+*)UNIX   :-invented by linus tolvalds and he wrote LINUX.since it is a free so IBM took the code they developed AIX,HP-->HP-ux,Apple-->mac os,
+ -------   Sun micro-->sun solaries
+
+           1)free to install
+           2)open to the world
+           3)not user friendly,difficult to learn.
+           4)light weight(consumes less resourcess which means it will take less Ram and provides high speed)
+           5)secure form hacking and virus.
+           6)multiple users and multiple tasks are possible we have no limit in users.
+            LINUX OS:-RHEL,CENTOS,UBUNTU,Amazon Linux,fedora,linux mint.
+
+Achtechture of Windows&Linux:-
+-------------------------------
+Windows:                                                              Linux:
+--------                                                              -------
+*)H/W->OS->Shell->User                                                *)H/W->Kernel->Shell->User
+*)in windows they added GUI on the top of shell for short cuts        *)no gui
+*)os,file,folder,s/w                                                  *)kernel,file,directory,package
+
+Video 11
+----------
+stucture of files and folders(file system hyrarche)
+----------------------------------------------------
+Windows--C-program files                               Linux--/-root
+          -program files X84                                   -home
+          -usera                                               -bin-->commands(both as a user and admin can use the all commands)
+          -windows                                             -sbin-->some of the commands(only admin can exicute all)
+                                                               -boot-->os related files.
+                                                               -etc-->all configurations related files.
+                                                               -usr-->all s/w's are installed in this folders.
+
+*)when you open your windows CMD the default location is C:/Users/Admin.if you want to go back you need to use command "cd .." and if you
+  want to go any folder then "cd name of the folder" here cd means change directory.
+*)when you open your linux CMD as a administator your default location is /root.and if you open as a normal user your default location is
+  /home.and all file which are belongs to Operating System those files in boot folder.
+*)when you turn on your computer since from that moment to till you see your screen in that period whatever the process happend that 
+  process is called booting process in this process all inactive files comes to active state.the files which are belongs to operating 
+  system they will test themselfs this is  post(power on self test).
+*)"/" top level root directory.in linux
+*)after launching your linux instance you will be a ec2 user which mean your a normal user if you want to exicute all linux commands
+  you have to be a adminstrator so to swich to normal user to administrator you need to use command "sudo su" enter and "cd ../.." this 
+  command used to go top level root directory.
+*)"ls"command used for to know all folders present in the instance.
+
+video 12
+--------
+how to creat file:-
+-------------------
+                     1)cat=cat > filename enter
+                           add the data enter
+                           ctrl+d
+                           //note:-if you want to see the content syntax =cat filename enter.you will get what you wrote for the first
+                                   time if you want to add other data syntax =cat >>filename enter.
+                     2)touch=touch filename
+                             //note:-if you want to creat the empty file then you need to use thos and by this you can creat multiple 
+                                     empty files and it's syntax is "touch file1 file2 file3 file4" like that.
+                     3)nano=nano filename
+                            it is going to open i box write the data
+                            ctrl+x,y enter.
+                     4)vi (or) vim=vi filename
+                                   i(insert data) and write data
+                                   esc:wq     w means save and q means quite.
+
+*)nano&vi we called as editors.by theese we can creat,add,edit,delete,append,override.
+*)with cat we can creat,add,delete,append,override but we can't edit the file.
+
+how to creat directory:-
+------------------------
+*)"mkdir name1 name2 name3" you can able to creat number of directary.
+how to creat hidden directory and hidden file:-
+-----------------------------------------------
+*)befor giving the name you need to give dot.syntax for file=cat .filename and syntax for directory =mkdir .foldername
+*)if you want to see all folder which includes hidden files you need use "ls -a" here -a is a flag and a means all.
+*)if you want to see the full length then you need to use "ls -l" here -l is a flag and l means long.
+*)if you want to see both at once "ls -la" or "ls -al".
+*)ctrl+l to clear.
+how to creat a folder inside of a othe folder:-
+----------------------------------------------
+*)Syntax=mkdir -p fn1/fn2/fn3
+*)if you want to see f3 first you need to go f1 and f2 after you will see f3.
+*)if you want to go back you need to use the command "cd .."
+*)"." single dot represent the current directory and ".." double dot represent the previous dir.
+*)if you want go directly to fn3 folder then command "cd fn1/fn2/fn3"
+*)if you want to come to main directory directly then the command "cd ../../.."
+*)if you want to see where you are in then command "pwd"(print working directory).
+*)if you want to see what are the commands you used till now for that "history"

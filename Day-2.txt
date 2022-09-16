@@ -1,0 +1,21 @@
+launch linux instance:-
+----------------------
+*)Windows will give more RAM(30GB)but linux will not give that much why means Windows provides the GUI(Graphical user interface) and CLI
+  (Command Line Interface) but linux will provide CLI only.
+
+Port numbers:
+-------------
+*)RDP(remote desktop protocal)-3389->windows
+  SSH(    secure shell       )-22->linux
+  HTTP(Hypertext Transfer Protocol)-80->internet
+  HTTPS(Hyper Text Transfer Protocol Secure)-443->security
+
+*)PEM:-Privacy Enhanced Mail
+*)PPK:-Putty Private Key
+*)url to download "putty and puttygen":-https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+*)to convert pem file to ppk file we need to use PuttyGen
+  double click on app->click on load->chose pem file(you can not see that pem file for that you need to select all files at right bottom side)
+  ->open->save as private file->click on yes for password not required->give name->save file.
+*)to open instance:-double click on Putty->(go to instance in aws and select  instance click on connct and goto ssh client and copy ip address)
+  ->paste it on Host name or Ip Address->At left side you will find ssh->auth click on that->click on browse->select ppk file->click on open 
+  ->accept.

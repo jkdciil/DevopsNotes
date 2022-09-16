@@ -1,0 +1,51 @@
+Devops:-a group of S/W we are going to install in the linex operating system which are from the AWS server.
+
+*)as a devops engg you need to take care Build(need to convert .exe file) and deployment and monitor.
+*)Server:-high config computer we called as a server.
+AWS Cloud
+----------
+*)Cloud:-someone maintaining the server somewhere in the world but we are able to access through the internet
+*)EC2:-Elastic compute cloud.amazon elastic computing cloud is a web service that provides a resizeble compute capacity in the cloud and
+       it reduces the time to launch the instances and allowing you to quick scale capacity,scale up and down. 
+url for aws cloud:-aws console
+
+AWS Terminologies:-
+------------------
+*)OS   -AMI (Amazon Machine Image)
+*)CPU  -
+*)RAM  -
+       //note:-if they provide one CPU then they will provide 1GB of RAM for 2 CPU-4GB RAM for 4 CPU-8GB like that they will provide till
+               128 cpu-4000GB RAM. and we will call this "instance type"(CPU+RAM).
+*)Hard Disc:-EBS(Elostic Block Storage)
+       //note:-we have two types of storages
+               1)block:-it is like C drive in your laptop you can install any s/w and you can store anything
+               2)Object:-it is like D drive in your laptop you cannot install any s/w you can only store the data.
+*)computer -instance
+
+*)Scalable:-in this we have two things one is scale up and scale down.
+            scale up:- means if you have a laptop with 4GB RAM and 1TB if you want more than this like you need 32GB RAM and 4TB ROM
+                       it is possible in EC2.
+            scale down:-32GB RAM and 4TB ROM TO 4GB RAM and 1TB called scale down.
+*)Advantage
+-----------
+1)On-Demand:-they will give what you ask(if you want 32GB RAM 2TB RAM )
+2)Scalable
+3)Pay as you go:-it is like a power bill or internet bill if you use 2 instance for 2 hr you will get less bill if you use 200 instances 
+                 for 2 hr you will get more bill.
+
+Launch Windows Instance:
+------------------------
+login aws->all services->EC2->launch instance->name and tag           ->creat key pair(it will download PEM file)
+                                               amazon machine image
+                                               instance type
+
+*).pem file will have encrypted data  
+*)in instance you need to select which one you need to run after this you need to click on connect element there you will find "RDP client"
+  in RDP client you will find computer name or ip address and password 
+*)at password you have one option called get password then you need to browse the pem file and click on open then you will find decrypt
+  click it you will get password.
+*)you need to open remote desktop connection there you need to fill ip adress username and password.
+*)you will get one window operating system.if you want to close the os you need to click on "X".even though you closed the OS it will 
+  run for that you need to come to the instance there you will find instance state->stopinstance.
+
+

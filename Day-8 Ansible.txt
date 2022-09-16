@@ -1,0 +1,537 @@
+Video-33
+--------
+*)it is a configuration management tool.configuration means how many users and groups in your instance and what are the permission
+  and what are the files and folders and s/w packages,services,ip/ports are present in your instance.these things managed by the
+  ansible tool.here management means add,edit,delete,append.
+*)administrator or linux peoples can do this manually as a devops engg you need to automate these all using tools like ansible,
+  puppet,chef,salt stack.
+*)all configuration management tools internally follows IAC(infrastructure as code) concept.the process of converting code into 
+  infrastucture which is known as IAC.
+*)iac means we will write a code for creating 1000 users and 500 groups in a file and we will exicute this automatically it will
+  creat those things.
+*)whatever the code we will write in a file that is repetable,testable(internally it will test),versionable(commit id's are versions).
+
+Configuration management:-
+--------------------------
+*)it is a method through which we will automate admin works.configuration management tool will turns your code into infrastructure.
+  so your code should be repetable,testable,versionable.
+
+*)if you didn't use CMtool then cost is high due to manpower,time taken for install s/w,slow,lot of time to update.
+*)if you use CM tool it is totally automating it will take less time to create users,to update,reduce downtime,improve performance.
+  it will prevent the errors,reduce the cost.
+
+why ansible:-
+-------------
+*)• Ansible is an administration tool. What ever system admins (Linux/windows) used to
+do manually, now we are automating all those tasks by using Ansible (Any CM Tool)
+• Can use this tool whether your servers are in on-premises or in the cloud.
+• It turns your code into infrastructure i.e your computing environment has some of the
+same attributes as your application:
+• Your code is versionable.
+• Your code is repeatable.
+• Your code is testable.
+• You only need to tell what the desired configuration should be, not how to achieve it
+• Through automation, get desired state of server.
+Why Ansible?
+
+• Other tools in the market can be really complicated ..
+o huge overhead of Infrastructure setup
+o complicated setup
+o Pull mechanism
+o Lot of learning required
+• Pros of Ansible :
+ Agentless
+ Relies on ssh
+ Uses python
+ Push mechanism
+
+Video-34(cheff)
+----------------
+
+Video-35
+--------
+*)i will create one instance in that i will install the ansible then it will become a ansible server.
+*)i will creat one file in that instance that file is nothing but "playbook" in this book we will write YAMEL scripting language
+*)now i will creat 3 instancess one for anseble server others are hosts i will establish the connection b/n anseble server to 
+  hosts through ssh.
+how to download and install ansible:-
+-------------------------------------
+*)first we need download epel repository.inside of the repo you will see git,ansible,python,python-pip,python devel,openSSL.
+*)steps:-download epel repo
+         install epel repo
+         update OS
+         install all s/w one by one.
+*)in second step we installed epel it doesn't meen it will install all s/w which are in epel repo.after update os your instance 
+  will recognize epel s/w.
+*)if suppose wget not installed in your computer then you need to install "yum install wget -y".but now i am using amazon linux
+  os so no need to install.
+
+step-1
+------
+*)"wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" and enter.
+step-2
+------
+*)"yum instal epel-release-latest-7.noarch.rpm -y" enter.
+step-3
+------
+*)"yum update -y" enter.
+step-4
+-------
+*)"yum install git python python-devel python-pip openssl ansible -y" enter.this will install all s/w at a time.
+
+Video-36
+--------
+*)when you install ansible in your instance it will create two files automatically 1)ansible.cfg 2)hosts file (or) invventory 
+  file.
+*)those files will available in "/etc/ansible" folder.
+*)inside of inventory file we will mention hosts ip adress that's why we will call inventory file as hosts file.if suppose we 
+  have 2 hosts or clients we are going to mention those hosts ip adress inthe inventory file.
+*)all entry's of hosts file will available in the ansible.cfg file in the commented form so we need to uncomment that one.
+
+////uncomment in ansible.cfg
+
+*)open ansible.cfg file "vi /etc/ansible/ansible.cfg" you will find "#inventory= /etc/ansible/hosts" so you need to uncomment 
+  this one click on i and remove #. you need to uncomment one more also that is "#sudo-user = root". :wq enter.
+*)now my OS will understand hostfile.
+
+////mention client ip adress in hostfile
+
+*)open hostfile "vi /etc/ansible/hosts" ther you will find examples of groups below click i to insert creat any group and go to client instance
+  take private ip adress.
+  [webservers]
+  IP adress of host1
+  IP adress of host2 and save it.
+*)if you want to call 1st client then "webservers[0]" index always start with zero.if you want to call 2nd client "webserver[1]"
+*)ex:-if you have 50 client instancess then call 1 st =groupname[0]
+                                                 50th =groupname[49] or groupname[-1] //-1 means first from last
+                                                 45th =groupname[44] or groupname[-5]
+*)ex:-if you have 50 client instancess you need to call first five instancess
+                                             first 5  =groupname[0:4]
+                                        call 10 to 20 =groupname[9:19]
+*)ex:-if you have 2 group and eachgroup have 50 
+                  call 2nd one in G1 and 7th one inG2 =G1[1]:G2[6]
+
+*)here we need to use some admin linux commands
+
+////we need to follow 4 steps
+
+  1)create common user
+  2)set password
+  3)sudo privilage to common user means giving all permissions
+  4)establish ssh connections b/n two computers.by default it will ask password
+  5)ssh connections with out password
+  //note:-first 4 steps you need to do in h1,h2,server as a root user.last step you need to do in server as a ansible user.
+*) i am creating user in ansible server,h1,h2 with the name of ansible "useradd ansible"
+   and password "passwd ansible" enter it will ask you to set password type and enter it will ask retype password type and enter.
+*)now we sucessfully created username and password in server,h1,h2.
+*)now switch root user to ansible user "su - ansible" enter.
+*)now we are ableto create any file or folder as a ansible user but here your unable to install the s/w if you type 
+  "yum install httpd then it will show you like this :-you need to be a root user to perform this command
+*)if you give as a normal user"sudo yum install httpd -y" it will ask password if you enter password it will give msg like 
+  :-ansible is not in the sudoers file. the incident will be reported.
+*)so you need to give permission for the ansible user.only root can access the sudoers file.after giving permission ansible user 
+  also able to open this file.that is the main drawback with this sudoer file.at a time multiple users can access this file.
+  that's why redhat peoples created "visudo" file this file can allow one after othe user.
+*)opening sudoers file is not recommendable.if two users are working same time one user metined some username and other person 
+  delete those username at same time confussion will occure.
+*)"visudo" to open file some where you will find ##allow root to run any command any where.
+  click on i to insert below root "ansible ALL=(ALL) NOPASSWD: ALL" save and exit.this will give all permmissions and it don't
+  ask the password.
+*)switch to ansible user "su - ansible" and try to install httpd service "sudo yum install httpd -y" it will download.and it won't
+  ask the password.
+*)now we need to establish the ssh connection b/n server to h1,h2
+*)"ssh privateIpAdressOfTheHost" to establish connection b/n server and host you need to type this in server terminal.it will
+  ask you to type yes and enter.it will show permission denied.
+*)so before doing this you need to do some modifications.
+//note:-establshing ssh connections it does't mean connection b/n server instance to host instance it is a connection b/n 
+        server ansible user to host ansible user that's why we need to give user name same in both.
+
+Video-37
+--------
+////establish connection b/n user to host
+
+*)Syntax for ssh connection "ssh username@PrivateIpAdress".
+*)goto ansible user "su - ansible".
+*) "ssh privateIP" it will give you error so we need to modify a file.so come out from ansible user "exit".
+*)"vi /etc/ssh/sshd_config"
+*)in this file we need to uncomment few things then only our os will understand those things.first one is"#PermitRootLogin Yes"
+  second one is "#PasswordAuthentication Yes" it will consider first line.
+*)after doing this we need to restart the sshd service "service sshd restart"
+*)now connect server to host1 "ssh host1privateIP"<--in serverinstance.it will ask password "ansible".
+*)"exit" if all ok.
+*)now connect server to host2 "ssh host2Ipadress" it will ask password.
+*)exit if it all ok.
+*)if you want to install any s/w "ssh ipaderss" and "yum install tree" it will show some error so "sudo yum install tree"
+  you need to add sudo this will give all permissions to your ansible user like as a root user.
+*)exit from host.
+5th step:-
+----------
+*)you need to in sever ansible you need to provide some keys to genarate files "ssh-keygen" it will generate some key files.
+*)"ssh-keygen" enter,it will ask tosave file enter,it will ask password (noneed to give)simpli enter again enter.it will save
+  rsa file.
+*)two files are generated id_rsa,id_rsa.pub.  id_rsa is a private file and id_rsa.pub is a public file which are in /home/ansible/.ssh
+  folder.
+
+////generate files and copy in hosts
+
+*)we generated the id_rsa,id_rsa.pub in server now weneed to create .ssh folder in hosts and we need to creat file in .ssh folder
+  the file name is "autherized_keys".now we need to copy paste the data which is in id_rsa.pub.
+*)we need to do it manually so we will do mistakes so we have a command to do that "ssh-copy-id ansible@hostprivateIP" this one
+  will creat .ssh folder and authorized_keys in the host automatically.for the first time it will ask password.
+
+Video-38
+--------
+*)whenever you launch the instance "whoami" it will show you as a ec2-user this is a normal user.previously you created a ansible
+  user if you want to switch normal user to normal user then "su - username" then it will ask you the  password you need to enter
+  the password.
+*)total 3 ways to write the code.
+  1)ad-hoc commands(simple linux commands)
+  2)module(single module)
+  3)playbook(<=1 module)
+*)no idenpotencity concept in ad-hock we will see this concept in rest one's.idenpotencity means use code for one time only.
+
+//// see three waysof code
+
+*)"su - ansible" and to see what are the hosts in your server "ansible all --list-hosts" itwill show you the IP adress of hosts.
+*)to see groups and hosts in the server "vi /etc/ansible/hosts"
+*)if you want to call all "ansible webserver --list-hosts"
+*)               call 1 st one "ansible webservers[0] --list-hosts"  
+*)               call 2 nd one "ansible webservers[1] --list-hosts"
+*)               call last one "ansible webservers[-1] --list-hosts"
+*)               call 2nd last one "ansible webservers[-2] --list-hosts"
+
+*)being in server instance i want to see files and folders in host1,host2 "ansible groupname -a "ls" ".
+*)if you want to see hidden files also "ansible groupname -a "ls -al" ".
+*)if you want to see what are the folder and files in home folder in both hosts "ansible groupname -a "ls /home" ".
+*)if you want to creat any folder or file in both hosts under toplevel roor directory "ansible groupname -a "touch myfile" ".
+*)to install s/w "ansible webservers -a "sudo yum install tree". this will install s/w in h1,h2
+*)to verify "ansible webserver -a "sudo which tree" ".
+*)if you want to install httpd s/w in h1 only from server computer "ansible webservers[0] -a "sudo yum install httpd -y" ".
+*)if you want to creat any folder in h2 only "ansible webservers[1] -a "touch myfile" ".
+
+//note:-if you grt error like you need to be a root user then you need to  mention "sudo".till now we saw simple linux commands.this
+       is ad-hoc commands in this we don't see idenpotencity concept which means if you exicute any command to creat file or folder
+       which is alredy exicuted it will creat the folder agin.
+
+Video-39
+--------
+///using single module
+
+*)now if i want to install a software in both hosts from server computer using this module "ansible webservers -b -m yum -a "pkg=httpd state=present" ".
+  here "-b" is module "become root" "-m"means module which module "yum" module. in general yum is a linux command but ansible people
+  they made it like that."pkg=httpd" means s/w and "state=present" means install.
+
+*)now i want to update."ansible webservers -b -m yum -a "pkg=httpd state=latest" ". if you see the o/p in yellow colour it is exicuted successfully if 
+  you see o/p in green colour it didn't exicuted.
+
+*)now i want to uninstall s/w."ansible webservers -b -m yum -a "pkg=httpd state=abscent" ".
+
+*)now i want to start the service."ansible webserver -b -m service -a "pkg=httpd state=started" ".
+
+*)now i want to restart the service."ansible webservers -b -m yum -a "pkg=httpd state=restarted" ".
+
+*)now i want to stop the service."ansible webservers -b -m yum -a "pkg=httpd state=stoped" ".
+
+*)now i want to creat user."ansible webserver -b -m user -a "name=vishnu state=present" ".
+
+*)now i want to delete the user."ansible webserver -b -m user -a "name=vishnu state=absent" ".
+
+*)we have some default actions user->name->present
+                               file/folder->name->create
+                               yum->pkg ->install
+                               service->start.
+
+*)ex:-i want to create one user."ansible webserver -b -m user -a "name=phani" ". here no need to give "state=present" by default it
+      will take that.
+
+*)ex:-if you have 2 groups (webservers,gang) nou you need to install httpd in both groups."ansible webservers:gang -b -m yum -a "pkg=httpd" ".
+     or "ansible all -b -m yum -a "pkg=httpd" ".
+
+*)in above command if you don't want to mention "-b" then you need to mention "sudo".
+
+*)now i want to copy a file in the server and i need to paste in hosts "ansible webservers -b -m copy -a "src=filename dest=path" ".
+
+*)now i want to see setup details of the hosts."ansible webservers -m setup".it will give lenghthy o/p.
+
+*)now i want to see ip adress in the setup "ansible webservers -m setup -a 'filter=*ipv4*' ".it will show you the ip adress of hosts.
+
+*)in very rare condition we will use the ad-hoc commands and single module commands for one time activity.in companys we will use playbook
+
+////playbook
+
+*)we will creat a file in the server computer and we will write some code in the file this file we will called as playbook if we exicute
+  playbook then result will appere in the hosts.we will use YAML language in playbook.
+
+YAML(Yet Ain't Markup Language)
+-------------------------------
+*)indentation mean gap.
+
+*)For Ansible, nearly every YAML file starts with a list
+*)Each item in the list is a list of key/value pairs, commonly called a "dictionary"
+*)All YAML files have to begin with "---" and end with "...
+*)All members of a list lines must begin with same indentation level starting with "- "
+
+--- # A list of tasty fruits
+fruits:
+- Apple
+- Orange
+- Strawberry
+- Mango
+...
+
+*) A dictionary is represented in a simple key: value form (the colon must be followed by a space)
+
+--- # An employee record
+Employee:
+name: SAI
+job: DevOps Engineer
+skill: Elite
+...
+PlayBook
+---------
+*)Each playbook is composed of one or more ‘modules’ in a list
+
+*) Playbooks are divided into many sections like....
+*)Target Section - Defines the hosts against which playbooks tasks has to be executed
+*)Variable Section - Defines variables
+*)Tasks Section - List of all modules that we need to run, in an order
+
+////creat dummy playbook
+
+
+*)"vi test.yml" when you creat playbook then you need to give the extention ".yml".
+
+--- # i want to exicute few thing     //this line my computer can not understand because of #
+- hosts: webservers
+  tasks:
+           - name: install httpd service on webservers
+             action: pkg=httpd state=installed
+           - name: installed tree srvice on groupname
+             action: pkg=tree state=installed
+
+*)if you want to exicute this playbook "ansible-playbook test.yml"
+
+Video-40
+--------
+////creat and exicute one playbook
+
+*)creat a file in your server "vi target.yml" .open it and write data.
+
+--- # this is target section for my understanding purpose i am writing
+- hosts: webservers
+  user: ansible
+  become: yes # this means giving permissions
+  connection: ssh
+
+*)save it and exicute it "ansible-playbook target.yml" it will show you some o/p.in this
+  you will found "TASK [Gathering Facts]" this means whatever the entrys will happen in hosts it will give all info to the server.
+  you will fin "ok IP" it means your server able to connect host.
+
+*)you will get that data in setup.
+
+*)now i would like to exicute one task.then you need to creat file "vi task.yml"
+
+--- # this is task playbook
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+         - name: installing httpd in webservers
+           action: yum name=httpd state=installed
+
+*)this one will give o/p.
+*)if you didn't give [ : or indentation] currectly then you will get syntax error.
+*)if i add ignore_errors and i exicuted with below code.
+
+--- # this is task playbook
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+         - name: installing httpd in webservers
+           action: yum name=htt state=installed
+           ignore_errors: yes
+
+*)it will failed to install the httpd service.
+*)creat a file "vi vers.yml". in this we will see the variable concepts.
+
+--- # this is vars sections
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  vars:
+         pkgname: httpd
+
+  tasks:
+         - name: install httpd on webservers
+           action: yum name='{{pkgname}}' state=installed
+*) in above file we have 3 sections 1.target section 2.variable section 3.task section.
+
+////now we will see dependency tasks
+
+*)till now we saw main or direct tasks but now we will see dipendency tasks which meen installing httpd is main task but if you want
+  to start the httpd service this is dependency task for this you need to install httpd first.
+*)create one file "vi handler.yml"
+
+--- # this is handler playbook
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+            - name: installing httpd on webservers
+              action: yum name=httpd state=installed
+
+            - name: start httpd service
+              action: service name=httpd state=started
+
+*)Scenorio:-now httpd service is inactive position turn off httpd service. if you exicute the above code again then it will go to the
+  first action it's alredy installed so it will goto the second action and it will turn on the httpd service.it can not install httpd
+  s/w agin because it will follow the idenpotensity concept.
+
+*)now you dont want that if it exicute 1 st action then only it need to exicute 2 nd action. for that you need to add dependencys
+  in playbook.
+
+--- # this is handler playbook
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+            - name: installing httpd on webservers
+              action: yum name=httpd state=installed
+              notify: start httpd service
+
+  handlers:
+
+            - name: start httpd service
+              action: service name=httpd state=started
+*)exicute this.after httpd service off now it won't turn on.because of indentency concept httpd service alredy installed so it can not
+  install that again so it can't go to next activity because of dependency.
+
+Video-41
+--------
+//// how to remove your bill.
+
+*)"ansible-playbook handler.yml --check" enter. "--check" means it can't exicute in the hosts but it will show you final o/p.
+
+////creta multiple grous and install multiple s/w.
+
+*)"vi loops.yml" creat playbook.
+
+--- # creat multiple users by using loops concept
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+         - name: creat multiple users in hosts
+           user: name='{{item}}' state=present
+           with_items:
+                     - Alex
+                     - Mary
+                     - Rohit
+                     - Rithika
+
+
+*)in above code we used loops concept first it will creat one user and after this it will search for the second user.like that. 
+
+////install multiple s/w's
+
+*)creat playbook "vi imsoft"
+
+--- # install multiple s/w's by using loops concept
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+         - name: install multiple s/w in hosts
+           yum: name='{{item}}' state=present
+           with_items:
+                     - httpd
+                     - tree
+                     - git
+                     - mysql
+
+*)after exicuting this one you will see depreciation warning in your if you don't want that then "sudo vi /etc/ansible/ansible.cfg"
+  click on i and go any where and "deprecation_warnings=False" type this and save it.and if you exicute it one more time you can't
+  get those lines.
+
+Conditions:-
+------------
+//note:-you have server and 10 hosts (5centOS,5 ubuntu) in playbook if you mention module as "yum" then s/w will install in centOS
+        hosts only other hosts they can't understand if you set as "apt-get" then it won't work in the centOS.so here you need to set
+        some conditions.if it is a centOS host then don't exicute "apt-get" or if it is a "ubuntu' then don't exicute "yum".
+
+*)creat a file "vi conditions.yml"
+
+--- # conditions for ubuntu,centOS
+- hosts: webservers
+  become: yes
+  connection: ssh
+  user: ansible
+  tasks:
+           - name: install apache s/w in the ubuntu
+             command: apt-get install apache2 -y
+             when: ansible_os_family == "Debian"
+
+
+           - name: install apache s/w in cenOS
+             command: yum install httpd -y
+             when: ansible_os_family == "RedHat"
+
+*)now it will install the httpd s/w in the both hosts because our hosts are AWS linux OS.it took 2 nd command.it skipped the first 
+  command.
+
+*)if you don't want to see partcular warning msg in your o/p then goto "sudo vi /etc/ansible/ansible.cfg" copy the warning msg in the
+  file.
+
+////creat file 
+
+*)creat a playbook "vi catfile.yml".in playbook at "path" you need to give the name of the file or folder.
+
+--- # creat a file in the hosts
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+         - name: creating file in the hosts
+           file: path=/home/ansible/mpd.txt state=touch
+
+////creat a folder
+
+*)creat a playbook "vi fol.yml".for practice purpouse add dependency and creat one file.
+
+--- # creat a folder and for prac add dependency creat file inside folder
+- hosts: webservers
+  become: yes
+  user: ansible
+  tasks:
+         - name: creat a folder in hosts
+           file: path=/tmp/wakandai state=directory
+           notify: creat file in the wakanda folder
+
+  handlers:
+         - name: creat file in the wakanda folder
+           file: path=/tmp/wakandai/wak.txt state=touch
+
+////copy the file from server to hosts.
+
+*)creat the playbook "vi copy.yml" and at src=./ meanse it will indicate the current directory.
+
+--- # copy file from server to host
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+        - name: copy the file
+          copy: src=./file1 dest=/home/ansible
+
+Video-42
+--------

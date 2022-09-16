@@ -1,0 +1,256 @@
+Video-18
+--------
+Source Code Manegement:-
+------------------------
+*)in this we ar eable to add the data and edit,delete,append and do lot of operations.
+tools:
+------
+1)GIT
+2)SVN(subversion)
+3)Perforce
+4)Clearcase
+Git Archetechture:-
+-------------------
+*)git init:-will creat the folder which contain three parts workspace,stage,local repository.
+*)we creat a folder in the work space and we need to send to staging area "git add" and we need to commit the file "git commit -m "this one""
+*)git hub is from microsoft company.it is a central repository.it will store and share the data.
+Video-19
+--------
+*)in local repository one default branch is availble that is master branch.you can put your files in bran only your unableto put files in
+  repository.master branch can not control other branches.
+*)work space:-where your work and where your file and documents are presents.
+*)tag:-meaning full name
+*)commit id:-you know who did and what he done.
+Why only git:-
+--------------
+*)Speed:-git internally use snapshot concept.it means backup.we have 2 types of backup's 1)whole 2)incremental
+  //whole backup:-it means if you have 10% data and you add other 10% data then backup have 20% of data and if you add 10% data then the 
+                  back up is 30%.it consume high storage other tools are follow this backup.
+  //incremental backup:-it means if you have a 10% of data and you add 10% of data then the backup is 10% only which you add recently.and
+                        if you add one more time then also the back up is 10% only which you add recently.git will follow this it will take
+                        less storage that's why it is fast.
+*)Parallel branching:-
+*)fully distributed:-back up copy is available in multiple locations.no  need of internet.no network latency.that's why we call it as 
+                     distributed version control system.no central server need for this but to avoid distubences we will use CS.
+*)Centralised Version control System:-SVN it will have central server.for each modification you need to contact central server.for every 
+  modification it need internet connection.
+Video-20
+--------
+*)Snapshot:-get any privious version.it is a incremental backup.it store the changes only not hole data.represent some data of a particular
+          time.in staging area git mechanisum will take care snapshot.
+*)Commit:-even a small dot is changed commit id will change.store changes in repo.track the changes.
+*)Git Stages:-WorkSpaces,Staging,local repositary,central repositary.
+*)staging area we will call buffer area.
+Types of repositary:-
+---------------------
+1)Bare repository(central):-store and share data.all central repositorys are Bare repositorys.
+2)non bare repository(local):-where you can modify your files,all local repositorys are non bare repositorys.
+
+Video-21
+--------
+How to Install Git:-
+--------------------
+*)creat a instance one in mumbai and one more in other region.and install in both instancess.
+*)after this we need to cofig name and email in git 
+   git config --globe user.name "vishnu"
+   git config --global user.email "vishnuabc@gmail.com"        -->this one in mumbai region.
+
+   git config --global user.name "vardhan"
+   git config --global user.email "vardhanabc@gmail.com"
+*)to check the above details are correctly provided "git config --list"
+*)you need to open gitHub
+*)you need to generate different key for different regions.
+
+
+Video 18 to 21
+--------------
+*)Important Terminology
+
+• Work space/Working Directory
+• Where you work
+• Where you see files physically & do modifications
+• Version/Version-ID/Commit-ID
+• Reference to identify each change and who did that change
+• Tag
+• Meaningful name (we can not remember Commit-ID)
+
+• Branch
+• Product is same, so one repo. But different tasks/ideas.
+• Each task/idea has one separate branch
+• Finally merge(code) all branches
+• For Parallel development/implement new ideas.
+• Can create any no of branches
+• Changes are personal to that particular branch
+• Can put files only in branches (not in repo directly)
+• Default branch is “Master”
+• Files created in workspace will be visible in any of the branch workspace until you commit. Once you
+commit, then that file belongs to that particular branch.
+
+• Speed:-it means git will follow the snapshot concept it  store the data in incremental type.other will store whole type.
+• //note:-we ha two types of storing concepts in git 1)whole 2)incrimental .suppose if you have 10% of data and you added 10% on the top of
+          existing data then it will store 20% if you add 10% more then it will show 30%.but in git if you have 10% of data and you add 10%
+          on existing data it will have 10% of data only which you added recently. 
+• Snapshots concept
+• Parallel branching
+• Multiple branches at a time unlike other SCM tools
+• Fully Distributed
+• Backup copy is available in multiple locations.
+• No need Internet connection. So no network latency.
+• No need central server separately
+• Each work space will have its own repo internally
+• Can create any no of branches
+• Can share code without using central repo
+• That’s why we call GIT as DVCS (Distributed Version Control System)
+
+• Work space
+• Physically see file & Modify
+• Staging/Indexing area
+• Buffer area
+• Takes snapshot
+
+• Repository (Local)
+• Store changes locally
+• Repository (Central)
+• Store changes Centrally
+
+Git stages
+
+• Bare Repositories (Central)
+• Store & share only
+• All central repositories are bare repositories
+• Non – Bare Repositories (Local)
+• Where you can modify the files
+• All local repositories are non-bare repositories
+Video-22-1(1:30)
+----------------
+*)we have created two instances in two different region and we installed git s/w in both instances and we set name email details in git.
+*)to know commit id "git log"
+*)till now we created a folder(mumbaigit) in ec2-user folder and we exicuted "git init" this created three parts workspace,stage,local repository.
+*)and we created a file inside mumbaigit folder and we wrote something and we need to add to stage "git add filename"or"git add .",and we commit 
+  "git commit -m "this is my first commit".
+*)this will creat one commit id to know commit id "git log".
+*)we need to push the code before pushing we need to establish communication between local repo to central repo.
+*)for that you need to open git hub.git remote add origin https://github.com/jkdciil/DevopsCentralRepo.git  you will get this from git hub.
+*)and you need to push "git push -u origin master" when you enter then it ask username and password.
+
+*)if you doing pull operation for the first time then initially we need to establish the communication b/n our local repo to central repo.
+*)to do that "git remote add origin https://github.com/jkdciil/DevopsCentralRepo".this one we will get from git hub.
+*)to pull "git pull origin master".
+*)he will get the file and do modifications and git add.,git commit -m "this one from paris",git push -u origin master
+*)it will ask you the username and password.
+*)"git show commit id" to see the data.
+
+Video-22-2(1:00)
+----------------
+*)Scenorio:-i have 1000 files in that i have 500 .txt file and 500 .class files.i want to push onlt .txt files only.this is not possible to
+  enter "git add filename" then you need to enter 500 times.if you do "git add." this command will add all files in your directory,but i 
+  don't want that.
+*)in this scenorio we need to use "git ignore" concept.first i will creat a file in my workspace->".gitignore" .in this file i will write
+  "*.class" and i will add to staging are and i will commit and push that file.whaatever the file you want to ignore you need to mention in
+  in that file like *.java or *.exe or *.svc or *.Json
+*)now creat few files inside mumbaigit folder "touch 1.txt 1.class 2.txt 2.class"
+*)now you need to add to staging area and you need to commit now check status 
+*)only .txt files only added to staging area and those files only committed.
+*)if you want to see only last 3 commit id "git log -3".
+*)"git log --online" this command will show the from where last commits are happend and commit id. 
+*)"git log --grep "word" " with this you can get data and commit id and and lot of details.if you remember any word then you need to mention
+*)Branches:-to see master branch "git branch".
+*)when you creat any file and your doing commiting by default it will goto master branch when no branch present.if you creat any new branch
+  that new branch will copy all files which are present in the master branch this will happen only once.
+*)to creat new branch "git branch newbranch"
+*)to check how many branches "git branch".
+*)how to switch to master branch to newbranch "git checkout newbranch".now you see "git branch" and enter now you will see newbrach name in
+  GREEN colour which means your workspace pointing towards the new branch whateve you will commit then it will go to new branch only.
+*)now you need to check all commit id's are coppied from master branch to newbranch "git log --online" by this your able to see.
+
+Video-23
+--------
+Rp@080896
+DaSa$115790
+-----------
+*)HEAD is always represent the new commit in the branch.
+*)you have two branches in new branch you created a file and you add,committed and you swich to master branch you can't see that file which
+  you created in newbranch.
+*)now your in newbranch and you created a file and you didn't added,commit and you switched your branch to master branch and you entered
+  "ls" now you are able to see the file.why beacuse workspace is same for both branches untill you commit it will stay in your work space
+  only.
+Merge:-
+-------
+*)copying the file and commit id's from one branch to other branch.
+*)you need to in master branch and you need to do merge "git merge newbranch".
+*)some conflicts will occure when both branches have same file name and with different body.this is called data conflict this will occure
+  at the time of merging.
+
+Video-24
+--------
+GitStash:-
+----------
+*)scenorio:-i created a file and i am writting code for a query and i am getting boar and i don't want to continue and i want to write code
+  for the other work in the same file.then we need to use git stash.
+*)for that you need to use stash storage.you need to work on "B" then you need to cut and paste "A" in stash storage.if you want resume "A"
+  work this time you need to do copy and paste.
+*)first you need to creat one empty file and then you need to commit the file then only you will have virtual storage.
+*)now i am in masterbranch and i created one file "cat > demo" and i inserted a line and i dont want to write any thing and i want to 
+  work on other work in the same files then you need to enter "git stash" it will cut and copy your data in stash storage.
+*)now i wrote other line and "git stash" 
+*)now to check how many jobs are in the stash storage "git stash list"
+  stash@{0} :WIP on master: commitID demofile -->this one represent the job B
+  stash@{1} :WIP on master: commitID demofile -->this one represent the job A
+*)if you wrote jjob C then the index is A->2,B->1,C->0 like that.
+*)if you want to work on job A "git stash apply stash@{1}" 
+*)you can edit the file now and you finished code for jobA and you added,commit the file now you want to work on jobB then the conflict 
+  will occure.we need to rectify manually you need to open that file and delete line "D" and save.now you dont get any conflict.
+*)[git stash,git stash apply stash@{0};git stash list;git stash clear]
+Git reset:-
+-----------
+*)Scenorio:-i have a file and i wrote some code and i add to staging area now i realised that i have done some mistake in that file.and i
+  would like to delete that file in staging(in the form of snapshot).
+*)"git reset filename" by this command we can delete snap shot.if you have multiple files to delete from staging area then"git reset ."
+
+Git revert:-
+------------
+*)Scenorio:-i have a file i add,commited that file but after commiting i realised that some mistakes are in the file.now i want to delete 
+            that file from staging area and in master branch.
+  //note:-it is not possible to delete the file which is in masterbranch after commiting.but by using "git revert commitID" we can delete
+          file from workspace,stagging,but in maasterbranch it will send a msg like "some mistakes are in this commit" and it will genarate
+          other commit id.
+*)you need to delete whichever you want to delete "git rm filename".
+*)after this you need to commit "git commit -m "this file deleted"
+*)this one also create one commit id's in feature you want data in that file  "git log --oneline" and there you will get commit id 
+  "git show commitID" it will show the data if you want the data you need to copy and paste somewhere.
+*)if you want to delete the files in workspace which are untracked."git cleane -n" this command will not delete the files it will ask us 
+  the files are redy to delete.
+*)to delete "git clean -f".
+*)"git rm .gitignore" to delete .gitignore file.
+
+Video-25
+--------
+*)goto github->settings->developer settings->personal access tokens->genarate new token->select all check box->genarate token->
+ copy token->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
+
+*)to establish connection between central repo to local repo "git remote add origin urlFromGitHub".
+
+Video-26
+--------
+Tags:-giving one meaning full name to commit id to recognize quickly.
+------
+*)"git tag -a tagname -m my_imp_cmt commitID" for gitving tagname to commit id.
+*)to check "git log --oneline" enter ther you will find commit id's and tag names.and if you want to see any data for peticular commit id
+  priviously "git show commitID" but insted of using that now we have tag "git show tagname".
+*)to delete tag name "git tag -d tagname".
+Central repository:-
+-------------------
+*)you have a master branch in your central repository.but you can able to creat new branches in that central repository.open github and 
+  select your repository and click on the master there you will find creat branch.give name to that branch and click on creat name branch
+  from master branch.when you click on that then new branch will copy all file from master branch one time only.
+*)creat a file in tha newbranch and commit it. it will genarate new commit id and we need to merge with the master branch.
+*)goto master branch click on pull request and you will find click on pull request.after this you will find the merge the pull request
+  it will generate one more commit in the master branch.
+Settings in github:-
+--------------------
+*)if you want to delete then you need to go to settings at bottom you will find remove the repository.
+Clone:-
+-------
+*)if you join any existing project then you need to clone the project."git clone githubURL".
+*)at the time of pushing you get any error then you need  to understand one thing that you need to pull the code first which you dont have.
+ 
