@@ -77,6 +77,7 @@ Video-29
 
 Video-30
 --------
+*)if any s/w not installing then you need to update the docker container "apt-get update"
 *)"apt-get install apache2" for ubuntu os(debian family) this is for installing httpd service.while installing it will ask you 
   about region(select region number) and time zone(select zone number and enter).
 *)"apt-get update -y" to update the container.
@@ -125,7 +126,7 @@ how to share volume:-
 
 *)create containe3 "docker run -it --name container3 -v /vish ubuntu /bin/bash"
 *)creat container4 by taking reference from container3
-  "docker run -it --name container4 --privileged=true --volume-from container3 ubuntu /bin/bash"
+  "docker run -it --name container4 --privileged=true --volumes-from container3 ubuntu /bin/bash"
 *)create one file in c4 it will appear in c3.
 
 //note:-above concept is share container-container.
@@ -158,7 +159,7 @@ Video-32
 *)go to var folder you will find www folder -> you will find html->index.html(default file) "cd /var/www/html"
 *)creat one file "echo "hi pandu" > vi.html"
 *)if you want to see data which is inside index.html then take publc ip from ec2 instance and google it.if you want to see data
-  of vi.html then "public ip:ec2 prt number/vi.html" you need to google it.
+  of vi.html then "public ip:ec2 port number/vi.html" you need to google it.
 *)if you want to creat other container then you need to open other port in ec2 instance
   "docker run -td --name container7 -p 90:80 ubuntu".
 

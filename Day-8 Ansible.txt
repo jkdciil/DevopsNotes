@@ -535,3 +535,172 @@ Conditions:-
 
 Video-42
 --------
+Vault:-Storing sensitive data.
+-------
+*)by using the vault we can encrypt the data.we can do that in two ways.
+  1)while creating the playbook we can do this.
+  2)we can dothis with existing playbook.
+
+////encrypt the data
+
+*)while creating playbook.after enter it will ask new password and confirm password.
+  "ansible-vault creat name.yml"
+
+*)now if you open this file "vi name.yml" you can see the data in encrypted format.if you want to edit this then
+  "ansible-vault edit name.yml" this one will ask the password which you entered above provide that password and enter.
+
+*)now if you want to change the password for the above file it will ask old password,new password,confirm password.
+  "ansible-vault rekey name.yml"
+
+*)now the data is not secret any more you want to allow for everyone to see that data.now you need to decrypt the data.
+  "ansible-vault decrypt name.yml" it will ask the password.
+
+////now see how to encrypt the data with the existing playbook.
+
+*)take existing playbook and make encrypt
+"ansible-vault encrypt name.yml"
+
+ROLES:-creating multiple playbook inside one playbook.we need to cegrigate all.
+-------
+*)roles concept will availble in chef,ansible,jenkins etc..
+
+*)adding more functionalities to the playbook is difficult to understand so we need to divide in to boxes.
+
+//note:-in roles concept you must follow one rule that is you must name your folders and files as he said in your company also
+        for my understanding i am writing this.
+
+////exicute ROLES concept
+
+*)creat a folder "mkdir passbook".//must give passbook
+*)inside of the passbook folder creat one file and one folder which will have sub folders
+  file --> "touch /home/ansible/passbook/master.yml"
+  "cd /home/ansible/passbook" come inside of this directory.
+  "mkdir -p role/testrole(any name)/tasks"
+*)inside of this testrole folder you can creat different folders like tasks,vars,handlers etc.
+*)inside this tasks folder create file "vi main.yml" //file name must be main.yml
+
+- name: install httpd service in hosts
+  yum: name=httpd state=installed
+
+*)now we need to connect this main.yml to main.yml which is in playbook folder.
+  "vi master.yml"
+
+--- # install httpd service using Roles concept
+- host: webservers
+  user: ansible
+  connection: ssh
+  become: yes
+  roles:
+         - testroles
+            - tasks
+            - vars
+
+*)if you have handler,vars folders you need to mention below of "-tasks" in master.yml.
+*)now exicute it "ansible-playbook master.yml"
+  
+Video-43
+--------
+//// install apache tomcat
+
+*)you can call it as a s/w or webcontainer
+
+*)the use of this web container is we will place . war file in this.
+
+*)her to install apache tomcat first you need to install java  then you need to install apache tomcat.
+
+*)create playbook "vi tom.yml"
+--- # install java in hosts
+- hosts: webservers
+  become: yes
+  connection: ssh
+  user: ansible
+  tasks:
+         - name: install java in redhat
+           yum: name=java state=installed
+           when: ansible_os_family == "RedHat"
+
+         - name: install java in debian
+           apt: name=default-jdk state=present
+           when: ansible_os_family == "Debian"
+# now download tomcat s/w
+         - name: download tomcat s/w
+           get_url: 
+                   url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
+                   dest: /opt
+# we downloaded the s/w now we need to extrac the file from tar.gz
+         - name: extract the files
+           unarchive:
+                        src: /opt/apache-tomcat-9.0.65.tar.gz
+                        dest: /opt
+                        remote_src: yes
+# now we need to give permission for that file.
+         - name: add exicutable permissions
+           file:
+                 path: /opt/apache-tomcat-9.0.65
+                 mode: 0777
+# now we need to start the service of the file
+         - name: start tomcat service
+           shell: nohup ./startup.sh
+           args:
+                 chdir: /opt/apache-tomcat-9.0.65/bin
+# now we need to stop the service of the file
+         - name: stop tomcat service
+           shell: nohup ./shutdown.sh
+           args:
+                 chdir: /opt/apache-tomcat-9.0.65/bin
+
+*)now i will i will take public ip of hosts and i will google it .it will show nothing.
+
+*)add 8080 in security group in hosts.
+
+*)now exicute "ansible-playbook tom.yml" it will exicute the things
+
+*)in debien state=installed will not work you need to mention state=present.
+
+////install java
+
+*)creat playbook "vi jenkins.yml"
+
+--- # install jenkins in the hosts.
+- hosts: webservers
+  user: ansible
+  connection: ssh
+  become: yes
+  tasks:
+           - name: downlod java
+             yum:
+                    name: java
+                    state: installed
+             when: ansible_os_family == "RedHat"
+
+           - name: downlod java
+             yum:
+                    name: java
+                    state: present
+             when: ansible_os_family == "Debian"
+# download jenkins goto pkg.jenkins you will get url
+           - name: download jenkins
+             get_url: 
+                      url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+                      dest: /etc/yum.repos.d/jenkins.repo
+# now you need to download key for jenkins
+           - name: download key for jenkins
+             rpm_key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+# now we need to install this
+           - name: install jenkins
+             yum:
+                    name: jenkins
+                    state: installed
+# now we need to start the service
+           - name: start the service
+             service: 
+                      name: jenkins
+                      state: started
+                      enabled: yes
+
+*)"ansible-playbook jenkins.yml"
+
+*)if you take public ip and search then it will open jenkins.
+
+--------------------------------------------Completed------------------------------

@@ -226,7 +226,7 @@ Git revert:-
 Video-25
 --------
 *)goto github->settings->developer settings->personal access tokens->genarate new token->select all check box->genarate token->
- copy token->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
+ copy token->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
 
 *)to establish connection between central repo to local repo "git remote add origin urlFromGitHub".
 

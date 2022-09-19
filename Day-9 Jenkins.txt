@@ -1,0 +1,15 @@
+Video-44
+--------
+*)CI-CD"-continuous integretion and continuous deployment.
+*)whenever developer write code,we integrate all that code of all developers at that point of time and we build,test
+  and deliver/deploy to the client.this process is called CI-CD
+*)intigrate:-combine all code writtten by developer till some point of time.
+*)build:-compile the code and make a small executable packeges.
+*)test:-test in all environments whether app is working or not.
+*)archived:-stored in a artifactory so in future we may use again.artifactory means .exe or .war file like that.
+*)delivery:-handing the product to the client.
+*)deploy:- installing product in client's machine.
+
+*)jenkins work flow:-once developers complete coding they will push the code to github.jenkins will pull the code and
+                     it will send that code to maven for build once it is ready then build will send for testing after
+                     completion of testing jenkins will send that code into artifactory. 

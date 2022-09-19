@@ -69,3 +69,38 @@ Scenorio:-if you have a folders fola/folb/folc/fold/fole
 *)command to creat 30 folder or files at a time.
 *)what is the use of "ctrl+c"?
 *)
+
+Docker:-
+-------
+*)what is docker and why we need docker?
+*)what is layered archetechture?
+*)what is union file system?
+*)what are the docker components?
+*)what are the ways to creat docker images?
+*)command to create container?
+*)command to see running containers?
+*)command to see how many images you downloaded?
+*)command to see all containers?
+*)command to download any s/w?
+*)command to change container name?
+*)command to creat container with the name?
+*)how to go inside of your container?
+*)how to exit from your container?
+*)commands for starting and stoping containers?
+*)command to remove container?//what we need to do first to remove?
+*)how to creat image from existing container?
+*)how to creat image from docker file?
+*)what is volume?
+*)types of volume shares and what are they?
+*)how to do volume sharing from container to container?
+*)how to do volume sharing from container to base?
+*)how to expose the data in containers with the help of ports?
+*)task:- take two containers and expose the data in the both containers?
+*)command for login into hub?
+*)command for allowcating space for image?
+*)command to push the image?
+*)command for pulling image?
+*)how to make the image as private?
+*)how to stop all like container and images?
+*)how to remove containers?
+*)how to remove images?
