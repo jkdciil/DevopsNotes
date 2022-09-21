@@ -13,3 +13,230 @@ Video-44
 *)jenkins work flow:-once developers complete coding they will push the code to github.jenkins will pull the code and
                      it will send that code to maven for build once it is ready then build will send for testing after
                      completion of testing jenkins will send that code into artifactory. 
+
+Video-45
+--------
+*)jenkins installation:-before installing jenkins we need to install few s/w like java,git,maven etc.
+*)java we must install.
+
+download git:-download git->get windows git-> double click->next,next.....install.your able to use linux commands in git.
+
+download java:-goto jdk-8 oracle->windows X64->download the file and exicute it.after download we need to set environmental
+               variables.thispc->right click->goto properties->advanced settings->environmental variables.
+              =>in user variable settings click on new and provide variable name as "JAVA_HOME" and in variable value
+                "c:\program files\java\jdk 8.0.1" you need to provide till jdk folder.
+              =>system variables click on new variable name "JAVA_HOME" and variable value "c:\program files\java\jdk 8.0.1"
+              
+              =>click on edit chose path and click on edit and new "c:\program files\java\jdk 8.0.1\bin" save it.
+                here you need to give till bin folder.to check cmd "java %JAVA_HOME%" it will show you the path.
+
+download maven:-download maven->bin.zip->extract the files in c drive->give system variable and value is till 
+               "apache-maven-3.8.6"
+               =>select path->edit->new->copy path till bin.
+
+download jenkins:-jenkins download->lts windows->download it
+
+*)click to run and select to run ar normal and click on test while showing 8080 and click on next...finish it will direct 
+  you to localhost:8080 it will ask you to install plugins after this creat username and password and finish it.
+*)now it is taking jdk 17.for this you need to download the jdk 17 and set environmental variables.
+
+*)http://localhost:8080/login?from=%2F
+
+Video-46
+--------
+*)if you want to restart your jenkins then "localhost:8080/restart" it will ask you to confirm click on yes.
+
+*)if you want to start your jenkins then "localhost:8080/start" it will ask you to confirm click on yes.
+
+*)if you want to stop your jenkins then "localhost:8080/stop" it will ask you to confirm click on yes.
+
+*)if you creat any job in your jenkins then the total data will appear in your local storage ".jenkins" folder.
+
+how to trouble soot
+-------------------
+*)select failed job click on name->config settings->again it will open config file just go down currect your mistake
+  ->save.
+
+*)scenorio:- you created 2 jobs and now you want to creat third job withe help of any existing job
+             click on new item->provide name and scroll down there is a option called copy from "firstjob".ok.
+
+////how to delete job
+ 
+*)click dropdown at name and select delete job.
+
+manage jenkins Option:
+----------------------
+*)click on manege jenkins you will see lot of options but now we will see manege plugins.click on manege plugins.
+  you will find update,installed,availble.
+*)if you want to install any plgin then goto availble and select plugin and install it.click on install without restart
+*)we need to install maven invoker,maven intigration plugins.after installing if you click on new item maven project
+  option will apper at below of the freelance project.
+*)till now we installed git,maven,java so we need to give the s/w installed location in jenkins.then only we are able 
+  exicute few jobs.
+
+////adding git,maven,java
+
+*)click on manage jenkins->gloable tool configuration. there you will find java in java defaultiy it select install
+  automatically there you need to deselect checkbox and after you need to give the name as "JAVA" and you need to 
+  give the java path till jdk "c:\programfiles\java\jdk 17.0.4.0" and come down you will see git.
+*)git is a small s/w so you no need to change leave as it is and come down you will see maven.
+*)at maven also you need to deselect the check box and give name and give path "C:\DevOps SoW\apache-maven-3.8.6".
+
+*)plugins ar enothhing but a intigration points.
+
+////creat a job with the help of github url
+
+*)https://github.com/Hari25cs/time-tracker    paste in search and click on fork.
+
+*) to creat build open cmd clone a project 
+   "git clone https://github.com/jkdciil/time-tracker.git"
+*)it will creat a folder inside user folder
+*)dir-> euals to "ls"
+*)you need to go inside of folder "cd time-tracker"
+*)now you need to give one maven command "mvn clean package" convererting raw source code into executable formate.
+*)till now we did manually to convererting raw source code into executable formate.
+
+*)now we will do with jenkins.
+
+*)click on new item->maven project->ok->come down you will find SCM below git select that and below provide github url
+  and at below you will find build there you need to give maven command "mvn cleane package" but jenkins kew maven so
+  give "cleane package" ->apply->save.
+*)if you run it you will see the result. 
+
+Docker hub:username:jinkavishnuvardhan
+           pword:Pandu@143143
+jenkins   :username:jinkavishnuvardhan
+           pword:Pandu@143143
+
+Video-47
+--------
+Sheduled projects:-
+-------------------
+*)we have two options in this 1)build periodical 2)poll Source Code Manegement(pull)
+
+Build Periodical:
+-----------------
+*)if you want to do periodically it means if you want to execute the code at a specific time then you need to click on
+  nameofjob->configure->build triggers below you will find build periodically select check box it will open a box if 
+  you mention "*****" first * reperesents minitue and second * reperesents hours and third * reperesents a day in the 
+  month and forth * reperesents month in the year fifth * reperesents a day of the week.
+*)"*****" this means it will exicute for every minitue.
+
+*)if i want to execute for every 45 min "*/45****"
+*)if i want to exicute for every 10 hour "**/10***"
+*)if i want to exicute 1 st min 1 st day for every day "*/1*/1***" 
+
+*)apply and save it will exicute.
+*)if you want to stop that exicution then you need to deselect build periodically checkbox.
+
+Poll SCM(pull)
+--------------
+*)the purpose of this option is jenkins will pull the code for every one minitue if any changes happen in github repo
+  then only it will exicute the jobso you nee to select this poll scm checkbox.goto build triggers below you will find
+  the option.
+*)the difference b/n with build periodical and poll scm is build periodicall will visit github and exicute the job
+  but poll scm will visit the github and it will exicute only if any changes happen in repo.
+
+linked/related jobs:
+--------------------
+*)in this we will find 1)up stream 2)down stream.
+
+*)up stream:-i will creat 2 jobs i will exicute one job after exicuting that it need to trigger other one also.
+  creat "jobA" and creat "jobB"
+*)in dash board click on jobA->config->at bottom you will find "post-build actions"->build other projects here you 
+  need to mention "jobB" it will show error at below so you need to click on back space after name. apply and save.
+  this is upstream.
+*)down stream here creat jobX and joby in dash board click on jobY->config->build triggers you will find 
+  "build after other projects are built" click on check box and you need to mention jobX. apply and save.
+   if you execute the jobX after completion jobY will trigger itself automatically.
+////google above topic///
+
+Views:
+------
+*)if you want to create any view then click on "+" button which is beside of the "all" and you need to add jobs and 
+  save it and give name.
+*)if you want to delete that select that view and you will find delete at left side delete it.
+
+Video-48
+--------
+*)if i want access my computer jenkins "local host:8080" if i want to access jenkins in some other computer then
+  "private IP:8080"
+
+jenkins user administration:
+----------------------------
+*)if you want to creat users in your jenkins then click on manage jenkins->manage users->creat users provide details
+  ->click oncreate user.
+*)to verify open any browser and localhost:8080 provide username and password. you can see all jobs.
+*)now think you created two users user1 is developer and user2 is tester.if you want to set any restrictions for them
+  first you need to add some plugins.
+
+*)goto manage jenkins->manage plugins->availble here search role-based authorization strategy. select that and click
+  on install without restart. condition here is you need to install this plugins as a admin(jinkavishnuvardhan).
+*)as a admin goto manage jenkins->config global security->authorization below it seleced default optin but you need to
+  choose rolebased auth.save it.
+*)now try to login as user1 it will show error like user1 is missing the Overall/Read permission.
+
+*)now as a admin you need to give permission for the users for that you need to do 2 things one create global role and
+  creat project specific role.
+*)as a admin click on manage jenkins->manage and assign roles->manage role->here you will find global role and item role.
+  item role is nothing but project specific role.
+=>global role->role to add here type "employee" and click on add and at top select check box.read and view and click 
+  on apply.
+=>in item role->role == Developer and pattern == dev.* and click on add.give all permission and apply.
+=>in item role ->remove Dev type Tester and pattern == test.* and click on add and give all permissions.and save it.
+
+// if you want all admin permission then click on jinkavishnuvardhan->config->give name as admin,set password as admin
+  and save it.
+*)now you need to assign role.
+*)assign roles->global roles add ravi,phani and click on employee checkbox and come down in item role add phani,ravi
+  and select dev or tester roles and save it.
+
+*)create two projects as a admi (Testproject,DevProject).now login as a ravi or phani they will see their respective 
+  jobs only.
+
+how to install jenkins in linux OS:
+-----------------------------------
+*)create one instance,in securiti groups enter 8080.
+*)"sudo su"
+*)exicute below commands
+  
+yum -y install java-1.8.0-openjdk
+java -version
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64
+export JAVA_HOME
+PATH=$PATH:$JAVA_HOME
+source ~/.bash_profile
+yum -y install wget
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum -y install jenkins
+		
+		Start Jenkins
+systemctl start jenkins /service jenkins start
+systemctl enable jenkins  /chkconfig jenkins on
+
+*)eventhogh you installed jenkins if you type "which jenkins" it will show no jenkins.
+*)if you want to use jenkins "instance public IP:8080" before this you need to start the service "service jenkins start"
+ 
+Video-49
+--------
+master&slave configs:
+---------------------
+*)master means the if you exicute job then the data will store in "c:/" drive this is the master branch.if you want to
+  creat slave then creat folders in local desk and distribute jobs to master and slave some jobs will store in slave.
+
+////create slaves in jenkins
+
+*)click on manage jenkins->manage nodes and cloud here you will find master branch. and click on "newnode"->give name
+  select riodio button of permanent agent and click on OK.
+*)it will open one page 1)name as it is 2)discription:-you can mention anything 3)number of exicutors:-if you mention
+  6 then slave is able to exicute only 6 job simultaniously. 4)remote root directory:-here you need to mention path
+  of your slave. like "c:\slave1" here it will create slave1 folder in c drive.
+  5)launh methods:-here you need to select launch via execution of command and controller. and below
+  you will find ? mark which beside the launch command click on that and download agent.jar and paste it in "c:\".
+  and give below command like this java -jar c:\agent.jar.
+
+*)if you want to creat one more slave then it will provide the option for copy the all setting from slave1.like
+  copy existing node.
+*)when you run job all one after other quickly then it will share some jobs to slaves.after exicution goto c:\ there
+  you will find slave1 folder.

@@ -1,0 +1,53 @@
+Video-50
+---------
+*)apache company created mave.
+*)it is a build tool with this tool we will convert raw source code into executable file like .jar , .war , .exe , .json  ..etc.
+*)build:-compile+assemble+create delivarable.
+         compile:-convert source code to machine redable formate.
+         assembly:grouping all .class files
+         deliverable: .war,.jar
+*).war file contains lot of jar files and html file and etc.
+*).ear(enterprise archive) file contains lot of .war file and html file and jar files etc.
+
+Q)how to do night time build activity in cmd?
+
+*)build tools:-• C, C++ : Make file
+               • .Net : Visual studio
+               • Java : Ant, Maven
+
+*)archetechture of maven:-• Main configuration file is pom.xml
+                          • One project - One workspace - One pom.xml
+                          • Requirements for build:
+                                 • Source code(Present in workspace)
+                                 • Compiler(Remote repo - local repo - Workspace)
+                                 • Dependencies(Remote repo - local repo - Workspace)
+
+*)maven build life cycle:-1. Generate resources ( Dependencies)
+                          2. Compile code
+                          3. Unit test
+                          4. Package (Build)
+                          5. Install (in to local repo & artifactory)
+                          6. Deploy (to servers)
+                          7. Clean (delete all run time files)
+                            eg: mvn install
+                                mvn clean package
+
+                          1-6 -> Default & Sequence order
+                          7 -> Not Default & It won’t follow sequence
+
+*)maven reository:-• Local (.M2)
+                   • Remote (https://repo1.maven.org/maven2/)
+
+*)imp points in maven:-• Maven is all about plug-ins
+                       • Snapshot: Indicates development copy of your project. Not the one which you are
+                         going to release.
+                       • eg: 1,0-SNAPSHOT
+                       • If you see version no in place of snapshot, then it means product is ready to give
+                         customer.
+
+*)multi module project:-• Simply dividing project into modules
+                        • Each module must have it's own SRC folder & pom.xml so that build will
+                          happen separately
+                        • To build all modules with one command, there should be a parent
+                          pom.xml file. This calls all child pom.xml files automatically
+                        • In parent pom.xml file, need to mention the child pom.xml order.

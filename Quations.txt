@@ -104,3 +104,5 @@ Docker:-
 *)how to stop all like container and images?
 *)how to remove containers?
 *)how to remove images?
+
+bcd838d6236147fb8ac744d6fc46dc74
