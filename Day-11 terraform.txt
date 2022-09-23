@@ -1,2 +1,233 @@
 Video-51
 --------
+*)hashi corporation created terraform.terraform is an open-source infrastructure as code(IAC)software and it is written
+  by "GO" language.
+*)IAC is all about writing code that describes your infrastructure.which means with this we will create the EC2 istance
+*)terraform follows IAC concept.
+*)this is not a configuration management tool.
+*)IAC:provisioning infrastructure using script/tool insted of manually configuring machine.here provisioning means
+  create,upload,deleting infrastructure.
+
+Terraform:-
+-----------
+*)it is a s/w enables you to create,change,and delete infrastructure safely and efficiently.and it supports all clouds
+*)it provides a consistence CLI work flow to manage hundreds of cloud services.
+*)in this for creating infrastructure we use HCL(Hashicorp Configuration Language).
+
+tool for IAC:-
+--------------
+*)here with the help of terraform you are able to create ec2 instance in all clouds.but rest of the thing is not like
+  that they supports their respective clouds only.
+*)• Terraform
+  • AWS CloudFormation
+  • Microsoft Azure Resource Manager
+  • Google Cloud Deployment Manager
+  • OpenStack
+  • VMware
+  • IBM Cloud
+
+Video-52
+--------
+install terraform in windows:
+-----------------------------
+*)got to www.terraform.io and click on download and choose windows X64 bit.
+*)you can't install terraform you are able to use the terraform through cmd.
+*)open cmd and go to where your terraform exe file is present.
+*)enter "terraform" it will show you all terraform commands in console.here we mainly use main commands only.
+*)if you eant to see terraform version "terraform --version".
+*)if you want to exicute the above commands then you must stay in terraform folder.other wise if you want to exicute 
+  your terraform commands from wherever you are in cmd then you need to add path in environmental variables.
+*)goto environmental variables and add the path till terraform folder.now you can exicute any command from any where.
+
+install terraform in linux:
+---------------------------
+*)create instance and launch it.
+*)if you want to install terraform then you have to be a normal user.
+*)create a folder here "mkdir terra".
+*)for installing terraform "wget https://releases.hashicorp.com/terraform/1.3.0/terraform_1.3.0_linux_amd64.zip" this
+  is amd64.
+*)you will get error so you need to install wget "sudo yum install wget" and enter.
+*)now enter command for download and you will get zip file you need to unzip that "unzip filename"
+*)here you need to install unzip "sudo yum install unzip" and after this you need to unzip the file.
+*)now after unzip the file you will get shellscripting file which is in green colour.if you want to exicute shell 
+  scripting then you need to add "./"
+*)"./terraform" it will open all commands and "./terraform --version" this one will give the version.
+*)here also same as windows if you want to exicute your terraform commands from wherever you are then you need to set
+  the path for terraform as a ec2-user.
+*)stay in terraform folder and exicute one command "PATH=${path}:/home/ec2-user/terraform"
+*)after this command you can exicute your commands from anywhere that too with out "./"
+*)if you restart your instance then if you exicute the command "terraform --version" then it won't work.
+*)previously entered path is temparary path if you want to give permanent path then you need to give that above path
+  in ".bash_profile"
+*)to do that "cd .."
+*)"vi .bash_profile" and add  "PATH=${path}:/home/ec2-user/terraform" at bottom. after this you need to restart the
+  .bash_profile file.to do that
+*)"source ~/.bash_profile" to restart the file. then you are able to exicute all commands from wherever you want.
+
+2 nd approch:
+-------------
+*)creat instance and be a normal user create folder and download terraform and unzip file and now you need to add path
+  insted of doing like above you need to exicute two commands
+*)first one to add pwd in .bash_profile by using shellcripting "echo $"export PATH=\PATH:$(pwd)" >> ~/.bash_profile"
+*)second one for restart the file."source ~/.bash_profile".
+  then you are able to exicute all commands from wherever you want.
+
+3rd approch:
+------------
+*)creat instance and be a normal user create folder and download terraform and unzip file and now you need to add path
+  insted of doing like above you need to exicute two commands.
+*)move unzipped file to "/usr/local/bin/"       "sudo mv terraform /usr/local/bin/".
+*)with the help of that one command you can able to use all commands from any where with out "./".even though you restart
+  the instance it will work.
+
+Video-53
+--------
+////create ec2 instance
+
+*)there are two typs of terraform configuration files one ends with ".tf" and other one will ends with .tf.json
+  .tf file is human readable but .tf.json machine readable.
+*)terraform will support the all cloud pluggins before going to work with any cloud you need to download respective 
+  pluggins.
+*)first you need to creat a file with .tf extention and you need to use HCL language inside it to create ec2 instance
+*)"terraform init" will download the required plggins.
+*)AWS IAM will interact with the terraform to create infrastructure.so create one IAM user open aws console search 
+  for IAM you will find users there you need to create user.
+*)users->add user->give user name and select Access key - Programmatic access it will give permission for the develop
+  ment tools, if you want give all permissions then you need to select below one(Password - AWS Management Console access)
+  also.click on next permission->click on attach existing policies directly->select first one->next tags->give any 
+  name and key this is not imp->ok->create user->download .csv file.
+*)in general in companys they provide you with limited permissions.
+
+*)now we need to config the credentials of IAM user on ec2 instance."aws configure --profile iamusername".
+  if you get error like this "aws: command not found" then you need to do few things.
+*)goto aws cli install in rhel you will find commands like below.
+  :-" curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" "after this we need to unzip
+    this "unzip awscliv2.zip" and then you need to install "sudo ./aws/install".
+*)now you need to exicute "aws configure --profile iamusername". this time you won't get error.
+*)now it will ask you access key and security key which are in .csv file and you need to choose region and you no need
+  to give output formate defaultly it will give json formate.and enter.
+
+//note:- if you get any error like all commands are not working then you need to install aws cli first and then you 
+        need to install terraform.
+    
+Video-54
+--------
+*)create one file "vi windows.tf".in this we need to write HCL language.
+
+////create windows instance
+
+*)go to terraform folder and create a file "vi vishnu.ft"
+  
+  provider "aws"{
+  profile="Phani"
+  access_key="AKIAQOXXOHGW7LW7UFCW"
+  secret_key="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"
+  region="ap-south-1"
+  }
+
+  resource "aws_instance" "nameof instance"{
+  ami="ami-09e5001ad68a3ec91"  //here ami you need to give AMI ID it will availble in aws console->launch instance.
+                                 you will find in ami.
+  tags={
+  name="windows1"
+  }
+  instance_type=t2.micro
+  key_name="keyname"           //if you want new key pair without launching instance goto ec2-dashboard->atleft bottom
+                                 you will find key pair and create a key pair.
+  security_groups=["${aws_security_group.allow_rdp.name}"]
+  }
+
+  resource "aws_security_group" "allow_rdp"{
+  name="allow_rdp"
+  description="allow rdp traffic"
+  ingress{
+  from_port+3389 
+  to_port=3389
+  protocol="tcp"
+  cidr_blocks=["0.0.0.0/0"]
+  }
+  }
+
+*)save it.
+
+*)"terraform init" this will download all plugins.it will initialized the plugins.
+*)"terraform validate" this will validate all configuration.
+*)"terraform fmt" after exicuting this command it will give required space in .tf file we must do this.
+*)"terraform plan" it will not create any thing but it will show you what other one is goind to create.
+*)"terraform apply" it will create instance it will generate instance id and security group.
+*)"terraform destroy" it will termin
+
+*)if you want to give the name then you need to go to .tf file and do some modifications.
+*)now you need to apply two commands "terraform fmt" "terraform apply". enter yes.
+
+Video-55
+--------
+////create linux os
+
+*)go to terraform folder and create .tf file and write HCL code in it.
+*)create new key-pair.
+*)"vi linux.ft"
+
+  provider "aws"{
+  profile="Phani"
+  access_key="AKIAQOXXOHGW7LW7UFCW"
+  secret_key="XoQJgyjYYRi24WNNm6Y0kpqn1P+YqY0QcgWBnGw7"
+  region="ap-south-1"
+  }
+
+  resource "aws_instance" "example"{
+  ami="ami-078296f82eb463377"  //here ami you need to give AMI ID it will availble in aws console->launch instance.
+                                 you will find in ami.
+  tags={
+  name="linux1"
+  }
+  instance_type=t2.micro
+  key_name="keyname"           //if you want new key pair without launching instance goto ec2-dashboard->atleft bottom
+                                 you will find key pair and create a key pair.
+  security_groups=["${aws_security_group.allow_ssh.name}"]
+  }
+
+  resource "aws_security_group" "allow_ssh"{
+  name="allow_ssh"
+  description="allow ssh traffic"
+  ingress{
+  from_port=22 
+  to_port=22
+  protocol="tcp"
+  cidr_blocks=["0.0.0.0/0"]
+  }
+  }
+
+*)"terraform init" this will download all plugins.it will initialized the plugins.
+*)"terraform validate" this will validate all configuration.
+*)"terraform fmt" after exicuting this command it will give required space in .tf file we must do this.
+*)"terraform plan" it will not create any thing but it will show you what other one is goind to create.
+*)"terraform apply" it will create instance it will generate instance id and security group.
+*)"terraform destroy" it will termin.
+
+*)ami is different for different regions.
+
+
+////create s3(simple storage service)
+
+*)it is like a google drive.
+*)create a file "vi s3.ft"
+
+  provider "aws"{
+  profile="Phani"
+  access_key="AKIAQOXXOHGW7LW7UFCW"
+  secret_key="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"
+  region="ap-south-1"
+  }
+  resource "aws-s3-bucket" "bucket"{
+  bucket="name-of-bucket"
+  acl="private"
+  tags={
+  name="mybucket"
+  }
+
+*)*)"terraform validate" this will validate all configuration.
+*)"terraform fmt" after exicuting this command it will give required space in .tf file we must do this.
+*)"terraform plan" it will not create any thing but it will show you what other one is goind to create.
+*)"terraform apply" it will create instance it will generate instance id and security group.
+*)"terraform destroy" it will termin.

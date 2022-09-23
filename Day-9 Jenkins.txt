@@ -240,3 +240,6 @@ master&slave configs:
   copy existing node.
 *)when you run job all one after other quickly then it will share some jobs to slaves.after exicution goto c:\ there
   you will find slave1 folder.
+
+
+*)if you want to uninstall jenkins in your laptop then you need to delete all files in your directory.

@@ -178,3 +178,4 @@ how to change group for the folder or file:-
    git config --global user.email "vardhanabc@gmail.com"
 *)to check the above details are correctly provided "git config --list"
 *)vi filename if you don't want to save ":q!".
+*)"uname -a" it will show you bit of instance and all X64 bit or not.
