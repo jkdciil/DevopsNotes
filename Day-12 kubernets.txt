@@ -1,0 +1,96 @@
+Video-56
+--------
+*)kubernetes is a container orchestration technology that creats,deploy and manages clusters(it is a bunch of conyainers).
+
+*)orchestration means clustering of any no oof containers which are running in diff H/W machine.
+*)isolated container means induvisual container.
+
+*)k8s schedule,runs and manages isolated containers which are running on virtual/physical/cloud machines.
+*)it can convert isolated containers which are running on different H/W machine into cluster.
+*)all 3 cloud supports kubernetes(azure,aws,gcp)
+
+features of K8S
+---------------
+*)ochestration
+*)auto scaling(clients will increse it will provide more containers)
+*)auto healing(new container in place of crashed container).
+*)load balencing(distribute the client request it will create load distributor or load balencer)
+*)fault tolerence(node/pod fails it will replace that node/pod with new one)
+*)roleback(if you have versions=v1,v2,v3 v1&v2 worked well but v3 is not working then it will goto v2)
+
+cluster ochestration:
+---------------------
+*)if you take a machine and if you install k8s that machine will become a k8s master on this we will see n no of nodes.
+  inside of this node we have pod's and docker container engine and infra.
+*)inside of pod's we will see n no of docker containers.
+*)pod is a atomic unit of deployment and it consist of minimum 1 container to maximum which are interlinked.
+  and it runs on nod which is controlled by master.
+
+kubernetes archetechture:
+-------------------------
+*)we have k8s master,node.
+*)the k8s master contains 4 major parts/(s/w) 1.kube-api server 2.kube-sceduler 3.controller manager 4.etcd
+*)if you want to give any request you need to give it through .yml file we need to give this request to "kube-api server"
+  it will send the this data to "etcd" and "kube-schedulor". 
+
+*)etcd will store the metadata in the form of key:values.
+*)kube-schedulor which is responsible for the actions it will decides how many nodes and container that need to create
+*)controller manager(actual state=desired state): if you have 4 containers in that one failed this controller manager 
+  will create that one container and it delivers.
+
+*)inside of node you will find kubelet,container engine,pod,kube-proxy
+*)kubelet will get the instructions from kube-scedular and it will pass to container engine this will create container
+  in pod.and kube proxy will provide IP adress for all containers.
+
+• Working with Kubernetes
+• We create manifest (.yml)
+• Apply this to cluster (to master) to bring into desired state
+• Pod runs on node, which is controlled by master
+
+• Role of master node
+• Kubernetes cluster contains containers running on Bare metal/VM Instances/Cloud
+instances/all mix.
+• Kubernetes designates one or more of these as master and all others as workers
+• The master is now going to run set of K8S processes. These processes will ensure
+smooth functioning of cluster. These processes are called "Control plane"
+• Can be Multi-master for high availability
+• Master runs control plane to run cluster smoothly
+
+Video-57
+--------
+constituents of control pannel:-which means how many components are presents.
+--------------------------------
+*)kube-api server:-
+
+*)etcd:-
+
+*)kube-schedular:-
+
+*)controller manager
+
+*)inside of node we have 3 parts.
+
+*)Kublet:-
+
+*)docker manager:-
+
+*)kube proxy:-
+
+*)what is POD:-
+
+*)POD limitation:-
+
+*)higher level kebernet objects:-
+
+*)commands:-
+
+*)2 boject  management methods:-
+
+*)test environment setup:-
+
+
+*)launch 3 instance in that 1 instance need to have 2 core cpu for k8s.while creating this select cpu "t2.medium".
+*)here you need to open desired port number(10255)for k8s.create and launch the instance.
+*)"sudo su" swich to root
+*)you need to set up in 3 instances.
+*)

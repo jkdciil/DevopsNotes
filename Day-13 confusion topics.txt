@@ -1,0 +1,41 @@
+Video-59
+---------
+*)Clod watch:-it is a monitoring tool from aws.while creating instance you need to choose monitering option in config instance.
+  in aws they monitor for every 5 min defaultly.but they provide detailed monitoring also.
+*)here you are able to create the alarm also if you want to set alarm if your instance cpu reach 90% utilization.
+*)all service->cloud wach->create alarm->you need to provide your instanc id and you need to give your mail to get notification.
+
+GIT:
+----
+*)difference b/n pull and fetch:-pull=fetch+merge  which means if you have 7 commit id's in your central repo and 3 commit id's in
+  your local repo if you want get rest things from your central to local then you need to do "git fetch" by this you can get the 
+  but your unable to see the data untill you exicute "git merge" then only your able to see the data.insted of doing this you need
+  to apply "git pull".
+*)"git diff master origin master" before pull if you wantto see the diff b/n your local to remote repo.
+*)if you want to delete the branch "git branch -D branch name".
+*)creating new branch in central repo first you need to create branch in your local repo and push that to central repo
+  "git push -u all"
+*)if you have a multiple branches in your local repo then you need to push from loca to desired branch in central repo then
+  "git push origin branchA"
+*)if you have two branches and you need to merge particular commit id then you need to use cherry pic concept 
+  "git cherry-pic commitID"
+*)if you want to get notification whenever any one do pull are push then you need to use git hooks.
+
+*)difference b/n git merge and git rebase we knew about merge and if you have clear idea to place then you need to use rebase
+  rebase.
+*)"git sqash" to move the content from multiple commits to parent commit you need to use git sqash.you will see all data in one
+  commit id.
+
+*)"git bisect" if you have lot of commits and some bugs are present in the commit for finding you will use this.
+
+Docker:-
+--------
+*)Dockerfile:-commands in docker file [cmd,run,entrypoint].if you use the cmd in your dockerfile you can able to over ride the data
+              but if you use entrypoint in your docker file then it will show you both data.
+
+ex foe cmd:-in df you mentioned "cmd echo "docker" " but while creating container you write like this
+            "docker run -it imagename /bin/bash echo "war" " then you will see war in your container insted of docker
+          //run time command will override the argument mention in CMD instruction in docker file
+ex for entrypoint:-in df you mentioned "entrypoint echo "aws"" but while creating container you write like this
+            "docker run -it imagename /bin/bash echo "azure" " then you will see both in your container. 
+          //run time command will not override the argument mention in Entrypoint instruction in docker file
