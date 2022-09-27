@@ -84,6 +84,9 @@ Video-30
 *)and creat a file in /tem/myfile and come back.
 *)now we need to creat one image.if you use this image in other container then the container will have the myfile and tree s/w
   and httpd s/w in that new container.
+
+////create imge wit the help of existing container.
+
 *)"exit" to come out from container. and to creat image from existing container "docker commit oldcontainer imageName".
 *)by this command we will create our own image.
 
@@ -117,6 +120,7 @@ Video-31
 *)creat container "docker run -it --name containername imagename /bin/bash"
 how to share volume:-
 ----------------------
+*)create container1 "docker run -it --name container1 -v /tmp/name ubuntu /bin/bash"
 *)till now we created one container only.you need to create 2 nd one so we need to add some thing while declaring the container
   "docker run -it --name container2 --volume-from container1 ubuntu /bin/bash".
 *)and you need to give all permission for container2 about volume so
